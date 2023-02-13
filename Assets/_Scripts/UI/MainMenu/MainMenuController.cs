@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class MainMenuController : MonoBehaviour {
 
     public void GoToMainGameScene() {
-        // TODO: Navigate to main game Scene
+        SceneManager.LoadScene("MainGame");
     }
 
     public void GoToHighScoresScene() {
