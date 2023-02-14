@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Shooter
+  - EnemyProjectilesPool
   layers:
   - Default
   - TransparentFX
