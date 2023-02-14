@@ -1,19 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class PlayerShootingBehaviour : MonoBehaviour {
 
     [SerializeField]
-    GameObject _projectile;
+    GameObject _projectilePrefab;
 
     Transform _shooterTransform;
+    ObjectPool<GameObject> _projectilesPool;
 
     void Awake() {
-        _shooterTransform = GetShooter();
+        _shooterTransform = GetShooterTransform();
     }
 
-    Transform GetShooter() {
+    Transform GetShooterTransform() {
         foreach (Transform child in this.transform.GetComponentsInChildren<Transform>()) {
             if (child.CompareTag(GameTags.ShooterTag)) {
                 return child;
@@ -25,7 +27,39 @@ public class PlayerShootingBehaviour : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        
+        InitProjectilePool();
+    }
+
+    void InitProjectilePool() {
+        _projectilesPool = new ObjectPool<GameObject>(
+            () => {
+                if (_shooterTransform != null) {
+                    var projectile = Instantiate(_projectilePrefab, _shooterTransform.position, Quaternion.identity);
+                    var projectileBehaviour = projectile.GetComponent<ProjectileBehaviour>();
+                    if (projectileBehaviour != null) {
+                        projectileBehaviour.Init(ReleaseProjectileToPool);
+                    }
+
+                    return projectile;
+                }
+                return null;
+            },
+            projectile => {
+                projectile.SetActive(true);
+                projectile.transform.position = _shooterTransform.position;
+            },
+            projectile => {
+                projectile.SetActive(false);
+            },
+            projectile => {
+                Destroy(projectile);
+            },
+            false, 10, 20
+        );
+    }
+
+    void ReleaseProjectileToPool(GameObject projectile) {
+        _projectilesPool.Release(projectile);
     }
 
     // Update is called once per frame
@@ -34,8 +68,6 @@ public class PlayerShootingBehaviour : MonoBehaviour {
     }
 
     void OnFire() {
-        if (_shooterTransform != null) {
-            Instantiate(_projectile, _shooterTransform.position, Quaternion.identity);
-        }
+        _projectilesPool.Get();
     }
 }
