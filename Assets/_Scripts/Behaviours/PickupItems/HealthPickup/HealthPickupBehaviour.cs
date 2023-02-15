@@ -15,7 +15,7 @@ public class HealthPickupBehaviour : PickupBehaviour {
     }
 
     protected override void OnPickedUpByPlayer() {
-        // TODO: Broadcast message to GameManager and Player tealling that a HealthPickup has been grabbed by the player
+        Messenger.Broadcast(GameEvents.HealthPickupGrabbedEvent);
         Destroy(gameObject);
     }
 }

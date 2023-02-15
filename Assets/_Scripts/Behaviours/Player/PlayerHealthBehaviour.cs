@@ -9,6 +9,14 @@ public class PlayerHealthBehaviour : MonoBehaviour {
     [SerializeField]
     int _healthPoints = 3;
 
+    void OnEnable() {
+        Messenger.AddListener(GameEvents.HealthPickupGrabbedEvent, RestoreHealth);
+    }
+
+    void OnDisable() {
+        Messenger.RemoveListener(GameEvents.HealthPickupGrabbedEvent, RestoreHealth);
+    }
+
     public void TakeDamage() {
         _healthPoints--;
         if (_healthPoints <= 0) {
@@ -22,7 +30,7 @@ public class PlayerHealthBehaviour : MonoBehaviour {
     }
 
     public void RestoreHealth() {
-        _healthPoints += ((_healthPoints + 1) >= _maxHealthPoints) ? 1 : 0;
+        _healthPoints += ((_healthPoints + 1) < _maxHealthPoints) ? 1 : 0;
     }
 
     public void IncreaseMaxHealthPoints() {
