@@ -7,7 +7,7 @@ public class EnemyShootingBehaviour : MonoBehaviour {
     [SerializeField]
     float _shootFrequency = 1f;
 
-    ProjectilesPoolBehaviour _projectilesPool;
+    EnemyProjectilesPoolBehaviour _projectilesPool;
     Transform _shooterTransform;
 
     void Awake() {
@@ -26,7 +26,7 @@ public class EnemyShootingBehaviour : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        _projectilesPool = GameObject.FindWithTag(GameTags.EnemyProjectilesPoolTag)?.GetComponent<ProjectilesPoolBehaviour>();
+        _projectilesPool = GameObject.FindWithTag(GameTags.EnemyProjectilesPoolTag)?.GetComponent<EnemyProjectilesPoolBehaviour>();
         StartCoroutine(Shoot());
     }
 

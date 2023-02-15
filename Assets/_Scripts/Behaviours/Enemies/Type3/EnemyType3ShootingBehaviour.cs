@@ -12,7 +12,7 @@ public class EnemyType3ShootingBehaviour : MonoBehaviour {
     [Range(0f, 1f)]
     float _singleShootFrequency = .1f;
 
-    ProjectilesPoolBehaviour _projectilesPool;
+    EnemyProjectilesPoolBehaviour _projectilesPool;
     Transform _shooterTransform;
 
     void Awake() {
@@ -31,7 +31,7 @@ public class EnemyType3ShootingBehaviour : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        _projectilesPool = GameObject.FindWithTag(GameTags.EnemyProjectilesPoolTag)?.GetComponent<ProjectilesPoolBehaviour>();
+        _projectilesPool = GameObject.FindWithTag(GameTags.EnemyProjectilesPoolTag)?.GetComponent<EnemyProjectilesPoolBehaviour>();
     }
 
     // Update is called once per frame

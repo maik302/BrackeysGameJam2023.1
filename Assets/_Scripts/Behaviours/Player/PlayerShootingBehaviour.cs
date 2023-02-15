@@ -58,7 +58,7 @@ public class PlayerShootingBehaviour : MonoBehaviour {
         );
     }
 
-    void ReleaseProjectileToPool(GameObject projectile) {
+    void ReleaseProjectileToPool(GameObject projectile, Collider2D collider) {
         _projectilesPool.Release(projectile);
     }
 

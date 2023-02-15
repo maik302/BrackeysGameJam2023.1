@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class ProjectilesPoolBehaviour : MonoBehaviour {
+public class EnemyProjectilesPoolBehaviour : MonoBehaviour {
 
     [SerializeField]
     GameObject _projectilePrefab;
@@ -38,7 +38,17 @@ public class ProjectilesPoolBehaviour : MonoBehaviour {
         );
     }
 
-    void ReleaseProjectileToPool(GameObject projectile) {
+    void ReleaseProjectileToPool(GameObject projectile, Collider2D collider) {
+        void HandleCollision(Collider2D collider) {
+            if (collider.gameObject.CompareTag(GameTags.PlayerTag)) {
+                var playerHealthBehaviour = collider.transform.GetComponent<PlayerHealthBehaviour>();
+                if (playerHealthBehaviour != null) {
+                    playerHealthBehaviour.TakeDamage();
+                }
+            }
+        }
+
+        HandleCollision(collider);
         _projectilesPool.Release(projectile);
     }
 
