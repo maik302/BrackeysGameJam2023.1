@@ -7,6 +7,8 @@ public class ProjectileBehaviour : MonoBehaviour {
 
     [SerializeField]
     float _speed = 5f;
+    [SerializeField]
+    int _power = 1;
 
     Action<GameObject, Collider2D> _collisionAction;
 
@@ -37,5 +39,13 @@ public class ProjectileBehaviour : MonoBehaviour {
 
     public void Init(Action<GameObject, Collider2D> collisionAction) {
         _collisionAction = collisionAction;
+    }
+
+    public void SetProjectilePower(int power) {
+        _power = power;
+    }
+
+    public int GetProjectilePower() {
+        return _power;
     }
 }

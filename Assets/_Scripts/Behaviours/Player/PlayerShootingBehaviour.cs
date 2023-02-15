@@ -7,6 +7,8 @@ public class PlayerShootingBehaviour : MonoBehaviour {
 
     [SerializeField]
     GameObject _projectilePrefab;
+    [SerializeField]
+    int _projectilePower = 1;
 
     Transform _shooterTransform;
     ObjectPool<GameObject> _projectilesPool;
@@ -38,6 +40,7 @@ public class PlayerShootingBehaviour : MonoBehaviour {
                     var projectileBehaviour = projectile.GetComponent<ProjectileBehaviour>();
                     if (projectileBehaviour != null) {
                         projectileBehaviour.Init(ReleaseProjectileToPool);
+                        projectileBehaviour.SetProjectilePower(_projectilePower);
                     }
 
                     return projectile;
@@ -59,7 +62,18 @@ public class PlayerShootingBehaviour : MonoBehaviour {
     }
 
     void ReleaseProjectileToPool(GameObject projectile, Collider2D collider) {
-        _projectilesPool.Release(projectile);
+        void HandleCollision(Collider2D collider) {
+            if (collider.gameObject.CompareTag(GameTags.EnemyTag)) {
+                var enemyHealthBehaviour = collider.transform.GetComponent<EnemyHealthBehaviour>();
+                if (enemyHealthBehaviour != null) {
+                    enemyHealthBehaviour.TakeDamage(_projectilePower);
+                }
+            } else if (!collider.gameObject.CompareTag(GameTags.PlayerTag)) {
+                _projectilesPool.Release(projectile);
+            }
+        }
+
+        HandleCollision(collider);
     }
 
     // Update is called once per frame
@@ -69,5 +83,9 @@ public class PlayerShootingBehaviour : MonoBehaviour {
 
     void OnFire() {
         _projectilesPool.Get();
+    }
+
+    public void IncreaseShootingPower() {
+        _projectilePower++;
     }
 }

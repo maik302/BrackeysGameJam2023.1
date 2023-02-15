@@ -45,11 +45,12 @@ public class EnemyProjectilesPoolBehaviour : MonoBehaviour {
                 if (playerHealthBehaviour != null) {
                     playerHealthBehaviour.TakeDamage();
                 }
+            } else if (!collider.gameObject.CompareTag(GameTags.EnemyTag)) {
+                _projectilesPool.Release(projectile);
             }
         }
 
         HandleCollision(collider);
-        _projectilesPool.Release(projectile);
     }
 
     public GameObject GetProjectileInstance(Transform shooterTransform) {
