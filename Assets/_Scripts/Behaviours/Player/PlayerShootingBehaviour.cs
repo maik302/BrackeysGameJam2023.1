@@ -69,7 +69,7 @@ public class PlayerShootingBehaviour : MonoBehaviour {
                     enemyHealthBehaviour.TakeDamage(_projectilePower);
                 }
                 _projectilesPool.Release(projectile);
-            } else if (!collider.gameObject.CompareTag(GameTags.PlayerTag)) {
+            } else if (!collider.gameObject.CompareTag(GameTags.PickupItemTag) && !collider.gameObject.CompareTag(GameTags.PlayerTag)) {
                 _projectilesPool.Release(projectile);
             }
         }
