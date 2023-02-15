@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyShootingBehaviour : MonoBehaviour {
+public class EnemyType3ShootingBehaviour : MonoBehaviour {
 
     [SerializeField]
-    float _shootFrequency = 1f;
+    int _projectilesToShoot = 10;
+    [SerializeField]
+    float _shootFrequency = 3f;
+    [SerializeField]
+    [Range(0f, 1f)]
+    float _singleShootFrequency = .1f;
 
     ProjectilesPoolBehaviour _projectilesPool;
     Transform _shooterTransform;
@@ -27,18 +32,28 @@ public class EnemyShootingBehaviour : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         _projectilesPool = GameObject.FindWithTag(GameTags.EnemyProjectilesPoolTag)?.GetComponent<ProjectilesPoolBehaviour>();
-        StartCoroutine(Shoot());
     }
 
     // Update is called once per frame
     void Update() {
-
+        
     }
 
     IEnumerator Shoot() {
         while (_shooterTransform != null) {
-            _projectilesPool.GetProjectileInstance(_shooterTransform);
+            StartCoroutine(ShootMultipleTimes());
             yield return new WaitForSeconds(_shootFrequency);
         }
+    }
+
+    IEnumerator ShootMultipleTimes() {
+        for (int i = 0; i < _projectilesToShoot; i++) {
+            _projectilesPool.GetProjectileInstance(_shooterTransform);
+            yield return new WaitForSeconds(_singleShootFrequency);
+        }
+    }
+
+    public void StartShooting() {
+        StartCoroutine(Shoot());
     }
 }
