@@ -10,13 +10,9 @@ public class ProjectileBehaviour : MonoBehaviour {
 
     Action<GameObject> _collisionAction;
 
-    public void Init(Action<GameObject> collisionAction) {
-        _collisionAction = collisionAction;
-    }
-
     // Start is called before the first frame update
     void Start() {
-        
+
     }
 
     // Update is called once per frame
@@ -25,10 +21,10 @@ public class ProjectileBehaviour : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        MoveForward();
+        Move();
     }
 
-    void MoveForward() {
+    void Move() {
         var rigidBody = GetComponent<Rigidbody2D>();
         if (rigidBody != null) {
             rigidBody.AddForce(transform.up * _speed, ForceMode2D.Impulse);
@@ -37,5 +33,9 @@ public class ProjectileBehaviour : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D collider) {
         _collisionAction(gameObject);
+    }
+
+    public void Init(Action<GameObject> collisionAction) {
+        _collisionAction = collisionAction;
     }
 }
