@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyType1ShootingBehaviour : MonoBehaviour {
+public class EnemyShootingBehaviour : MonoBehaviour {
 
     ProjectilesPoolBehaviour _projectilesPool;
     Transform _shooterTransform;
@@ -23,7 +23,7 @@ public class EnemyType1ShootingBehaviour : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        _projectilesPool = GameObject.FindWithTag(GameTags.EnemyProjectilesPool)?.GetComponent<ProjectilesPoolBehaviour>();
+        _projectilesPool = GameObject.FindWithTag(GameTags.EnemyProjectilesPoolTag)?.GetComponent<ProjectilesPoolBehaviour>();
         StartCoroutine(Shoot());
     }
 
@@ -33,7 +33,7 @@ public class EnemyType1ShootingBehaviour : MonoBehaviour {
     }
 
     IEnumerator Shoot() {
-        while (true && _shooterTransform != null) {
+        while (_shooterTransform != null) {
             _projectilesPool.GetProjectileInstance(_shooterTransform);
             yield return new WaitForSeconds(1f);
         }

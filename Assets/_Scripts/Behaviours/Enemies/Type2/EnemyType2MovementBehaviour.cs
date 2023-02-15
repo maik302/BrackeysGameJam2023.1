@@ -14,6 +14,7 @@ public class EnemyType2MovementBehaviour : MonoBehaviour {
     float _spriteMiddlePoint;
     float _movementChanges;
     Vector2 _leftBoundaryWithOffset, _rightBoundaryWithOffset;
+    Transform _playerTransform;
 
     void Awake() {
         // Get the middle point of the square-shapped sprite of this GameObject
@@ -26,11 +27,13 @@ public class EnemyType2MovementBehaviour : MonoBehaviour {
     void Start() {
         // Starts the t-value for the movement LERP at this object's travelled distance from the left boundary
         _movementChanges = Vector2.Distance(_leftBoundaryWithOffset, transform.position) / Vector2.Distance(_leftBoundaryWithOffset, _rightBoundaryWithOffset);
+        _playerTransform = GameObject.FindWithTag(GameTags.PlayerTag)?.transform;
     }
 
     // Update is called once per frame
     void Update() {
         Move();
+        TestLookAt();
     }
 
     void Move() {
@@ -40,5 +43,11 @@ public class EnemyType2MovementBehaviour : MonoBehaviour {
             _rightBoundaryWithOffset,
             Mathf.PingPong(_movementChanges, 1f)
         );
+    }
+
+    void TestLookAt() {
+        if (_playerTransform != null) {
+            transform.up = _playerTransform.position - transform.position;
+        }
     }
 }
