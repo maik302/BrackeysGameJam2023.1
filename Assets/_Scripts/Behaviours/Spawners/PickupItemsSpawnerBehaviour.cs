@@ -35,7 +35,7 @@ public class PickupItemsSpawnerBehaviour : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        InstantiateMaxHealthItem();
+        
     }
 
     // Update is called once per frame
@@ -44,10 +44,18 @@ public class PickupItemsSpawnerBehaviour : MonoBehaviour {
     }
 
     // TODO: This needs to be in a coroutine
-    public void InstantiateMaxHealthItem() {
+    public void InstantiateMaxHealthItem() => InstantiateAnItem(_maxHealthItemPrefab);
+
+    public void InstantiatePowerUpItem() => InstantiateAnItem(_powerUpItemPrefab);
+
+    public void InstantiateHealthItem() => InstantiateAnItem(_healthPrefab);
+
+    void InstantiateAnItem(GameObject itemPrefab) {
         var spawnXPos = GetRandomBoundedSpawnPosX();
-        Instantiate(_maxHealthItemPrefab, new Vector2(spawnXPos, _spawnerPosition.position.y), Quaternion.identity);
+        Instantiate(itemPrefab, new Vector2(spawnXPos, _spawnerPosition.position.y), Quaternion.identity);
         _previousItemSpawnedXPos = spawnXPos;
+
+        _spawnedItems++;
     }
 
     float GetRandomBoundedSpawnPosX() {
