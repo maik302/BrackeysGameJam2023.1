@@ -35,8 +35,8 @@ public class PlayerHealthBehaviour : MonoBehaviour {
     }
 
     void Die() {
-        Destroy(gameObject);
         Messenger.Broadcast(GameEvents.PlayerDiedEvent);
+        Destroy(gameObject);
     }
 
     public void RestoreHealth() {
