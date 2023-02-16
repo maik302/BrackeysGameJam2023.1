@@ -19,17 +19,31 @@ public class GameManager : MonoBehaviour {
     GameState _currentGameState;
 
     void OnEnable() {
+        // Pickup items related events
         Messenger.AddListener(GameEvents.MaxHealthPickupGrabbedEvent, IncreaseMaxHealthStatus);
         Messenger.AddListener(GameEvents.PowerUpPickupGrabbedEvent, IncreaseMaxPowerStatus);
+
+        // Enemies related events
         Messenger<int>.AddListener(GameEvents.EnemyDestroyedEvent, IncreaseScore);
+
+        // Player related events
         Messenger<int>.AddListener(GameEvents.PlayerHealthIncreasedEvent, IncreaseCurrentHealth);
+        Messenger.AddListener(GameEvents.PlayerTookDamageEvent, ReduceCurrentHealth);
+        Messenger.AddListener(GameEvents.PlayerDiedEvent, EndCurrentGame);
     }
 
     void OnDisable() {
+        // Pickup items related events
         Messenger.RemoveListener(GameEvents.MaxHealthPickupGrabbedEvent, IncreaseMaxHealthStatus);
         Messenger.RemoveListener(GameEvents.PowerUpPickupGrabbedEvent, IncreaseMaxPowerStatus);
+
+        // Enemies related events
         Messenger<int>.RemoveListener(GameEvents.EnemyDestroyedEvent, IncreaseScore);
+
+        // Player related events
         Messenger<int>.RemoveListener(GameEvents.PlayerHealthIncreasedEvent, IncreaseCurrentHealth);
+        Messenger.RemoveListener(GameEvents.PlayerTookDamageEvent, ReduceCurrentHealth);
+        Messenger.RemoveListener(GameEvents.PlayerDiedEvent, EndCurrentGame);
     }
 
     void Awake() {
@@ -80,6 +94,16 @@ public class GameManager : MonoBehaviour {
     }
 
     void IncreaseCurrentHealth(int healthPoints) {
-        // TODO: Update UI Adding new health points
+        _currentGameState.PlayerCurrentHealth += healthPoints;
+        // TODO: Update UI health points
     }
+
+    void ReduceCurrentHealth() {
+        _currentGameState.PlayerCurrentHealth--;
+        // TODO: Update UI health points
+    }
+
+    void EndCurrentGame() {
+        // TODO: Show UI for restarting a game with modifiers or go back to main menu
+    } 
 }

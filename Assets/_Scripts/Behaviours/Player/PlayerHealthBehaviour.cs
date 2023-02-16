@@ -28,6 +28,7 @@ public class PlayerHealthBehaviour : MonoBehaviour {
 
     public void TakeDamage() {
         _healthPoints--;
+        Messenger.Broadcast(GameEvents.PlayerTookDamageEvent);
         if (_healthPoints <= 0) {
             Die();
         }
@@ -35,7 +36,7 @@ public class PlayerHealthBehaviour : MonoBehaviour {
 
     void Die() {
         Destroy(gameObject);
-        // TODO: Report to GameManager that the current round has finished!
+        Messenger.Broadcast(GameEvents.PlayerDiedEvent);
     }
 
     public void RestoreHealth() {

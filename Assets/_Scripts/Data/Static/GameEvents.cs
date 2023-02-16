@@ -8,4 +8,6 @@ public static class GameEvents {
     public const string PowerUpPickupGrabbedEvent = "PowerUpPickupGrabbedEvent";
     public const string EnemyDestroyedEvent = "EnemyDestroyedEvent";
     public const string PlayerHealthIncreasedEvent = "PlayerHealthIncreasedEvent";
+    public const string PlayerTookDamageEvent = "PlayerTookDamageEvent";
+    public const string PlayerDiedEvent = "PlayerDiedEvent";
 }
