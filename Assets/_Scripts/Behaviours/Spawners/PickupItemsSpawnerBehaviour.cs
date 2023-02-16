@@ -27,6 +27,7 @@ public class PickupItemsSpawnerBehaviour : MonoBehaviour {
     public int MaxItemsToSpawn;
     
     int _spawnedItems;
+    float _previousItemSpawnedXPos;
 
     void Awake() {
         ResetSpawning();
@@ -44,8 +45,21 @@ public class PickupItemsSpawnerBehaviour : MonoBehaviour {
 
     // TODO: This needs to be in a coroutine
     public void InstantiateMaxHealthItem() {
-        var spawnXPos = Random.Range(_leftBoundaryTransform.position.x + _offestFromBoundaries, _rightBoundaryTransform.position.x - _offestFromBoundaries);
+        var spawnXPos = GetRandomBoundedSpawnPosX();
         Instantiate(_maxHealthItemPrefab, new Vector2(spawnXPos, _spawnerPosition.position.y), Quaternion.identity);
+        _previousItemSpawnedXPos = spawnXPos;
+    }
+
+    float GetRandomBoundedSpawnPosX() {
+        float spawnXPos;
+        
+        do {
+            spawnXPos = Random.Range(_leftBoundaryTransform.position.x + _offestFromBoundaries, _rightBoundaryTransform.position.x - _offestFromBoundaries);
+        } while (spawnXPos == _previousItemSpawnedXPos);
+        
+        _previousItemSpawnedXPos = spawnXPos;
+
+        return spawnXPos;
     }
 
     public void ResetSpawning() {
