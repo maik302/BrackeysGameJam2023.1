@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class PlayerHealthBehaviour : MonoBehaviour {
 
+    // For testing purposes only. This configuration will be made by the GameManager
     [SerializeField]
     int _maxHealthPoints = 3;
     [SerializeField]
     int _healthPoints = 3;
+
+    int _maxHealthAllowed;
 
     void OnEnable() {
         Messenger.AddListener(GameEvents.HealthPickupGrabbedEvent, RestoreHealth);
@@ -34,7 +37,13 @@ public class PlayerHealthBehaviour : MonoBehaviour {
     }
 
     public void IncreaseMaxHealthPoints() {
-        _maxHealthPoints++;
+        _maxHealthPoints += ((_maxHealthPoints + 1) < _maxHealthAllowed) ? 1 : 0;
+    }
+
+    public void InitHealthPoints(int maxHealthPoints, int maxHealthAllowed) {
+        _maxHealthPoints = maxHealthPoints;
+        _healthPoints = maxHealthPoints;
+        _maxHealthAllowed = maxHealthAllowed;
     }
 
 }

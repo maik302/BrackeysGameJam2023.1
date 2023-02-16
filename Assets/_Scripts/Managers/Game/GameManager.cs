@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour {
 
     [Header("Game State")]
     [SerializeField]
-    GameState _initialGameState;
+    public GameState _initialGameState;
     [SerializeField]
     int _maxHealthAllowed;
     [SerializeField]
@@ -37,7 +37,24 @@ public class GameManager : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        
+        InitGame();
+    }
+
+    void InitGame() {
+        void InitPlayer() {
+            var playerHealthBehaviour = _player.transform.GetComponent<PlayerHealthBehaviour>();
+            if (playerHealthBehaviour != null) {
+                playerHealthBehaviour.InitHealthPoints(_currentGameState.PlayerMaxHealth, _maxHealthAllowed);
+            }
+
+            var playerShootingBehaviour = _player.transform.GetComponent<PlayerShootingBehaviour>();
+            if (playerShootingBehaviour != null) {
+                playerShootingBehaviour.InitPowerPoints(_currentGameState.PlayerPowerLevel, _maxPowerAllowed);
+            }
+        }
+
+        InitPlayer();
+        // TODO: Init UI with current game state
     }
 
     // Update is called once per frame

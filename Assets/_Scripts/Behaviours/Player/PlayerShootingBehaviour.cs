@@ -8,7 +8,9 @@ public class PlayerShootingBehaviour : MonoBehaviour {
     [SerializeField]
     GameObject _projectilePrefab;
     [SerializeField]
-    int _projectilePower = 1;
+    int _powerPoints = 1;
+
+    int _maxPowerAllowed;
 
     Transform _shooterTransform;
     ObjectPool<GameObject> _projectilesPool;
@@ -40,7 +42,7 @@ public class PlayerShootingBehaviour : MonoBehaviour {
                     var projectileBehaviour = projectile.GetComponent<ProjectileBehaviour>();
                     if (projectileBehaviour != null) {
                         projectileBehaviour.Init(ReleaseProjectileToPool);
-                        projectileBehaviour.SetProjectilePower(_projectilePower);
+                        projectileBehaviour.SetProjectilePower(_powerPoints);
                     }
 
                     return projectile;
@@ -66,7 +68,7 @@ public class PlayerShootingBehaviour : MonoBehaviour {
             if (collider.gameObject.CompareTag(GameTags.EnemyTag)) {
                 var enemyHealthBehaviour = collider.transform.GetComponent<EnemyHealthBehaviour>();
                 if (enemyHealthBehaviour != null) {
-                    enemyHealthBehaviour.TakeDamage(_projectilePower);
+                    enemyHealthBehaviour.TakeDamage(_powerPoints);
                 }
                 _projectilesPool.Release(projectile);
             } else if (!collider.gameObject.CompareTag(GameTags.PickupItemTag) && !collider.gameObject.CompareTag(GameTags.PlayerTag)) {
@@ -87,6 +89,11 @@ public class PlayerShootingBehaviour : MonoBehaviour {
     }
 
     public void IncreaseShootingPower() {
-        _projectilePower++;
+        _powerPoints = ((_powerPoints + 1) < _maxPowerAllowed) ? 1 : 0;
+    }
+
+    public void InitPowerPoints(int powerPoints, int maxPowerAllowed) {
+        _powerPoints = powerPoints;
+        _maxPowerAllowed = maxPowerAllowed;
     }
 }

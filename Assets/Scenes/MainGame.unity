@@ -308,7 +308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _projectilePrefab: {fileID: 7678753849012454446, guid: 2914eb493dec5ee4aac9a14347943fa8, type: 3}
-  _projectilePower: 1
+  _powerPoints: 1
 --- !u!61 &170930816
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -843,6 +843,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda4ff54116a7744a9a7ae166f5c9fdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _initialGameState:
+    PlayerScore: 0
+    PlayerMaxHealth: 3
+    PlayerPowerLevel: 1
+    WaveReached: 1
+  _maxHealthAllowed: 5
+  _maxPowerAllowed: 3
+  _player: {fileID: 170930811}
 --- !u!1 &1356940474
 GameObject:
   m_ObjectHideFlags: 0
