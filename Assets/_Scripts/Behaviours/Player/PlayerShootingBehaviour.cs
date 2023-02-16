@@ -15,6 +15,14 @@ public class PlayerShootingBehaviour : MonoBehaviour {
     Transform _shooterTransform;
     ObjectPool<GameObject> _projectilesPool;
 
+    void OnEnable() {
+        Messenger.AddListener(GameEvents.PowerUpPickupGrabbedEvent, IncreaseShootingPower);
+    }
+
+    void OnDisable() {
+        Messenger.RemoveListener(GameEvents.PowerUpPickupGrabbedEvent, IncreaseShootingPower);
+    }
+
     void Awake() {
         _shooterTransform = GetShooterTransform();
     }
@@ -42,7 +50,6 @@ public class PlayerShootingBehaviour : MonoBehaviour {
                     var projectileBehaviour = projectile.GetComponent<ProjectileBehaviour>();
                     if (projectileBehaviour != null) {
                         projectileBehaviour.Init(ReleaseProjectileToPool);
-                        projectileBehaviour.SetProjectilePower(_powerPoints);
                     }
 
                     return projectile;
@@ -89,7 +96,7 @@ public class PlayerShootingBehaviour : MonoBehaviour {
     }
 
     public void IncreaseShootingPower() {
-        _powerPoints = ((_powerPoints + 1) < _maxPowerAllowed) ? 1 : 0;
+        _powerPoints += ((_powerPoints + 1) <= _maxPowerAllowed) ? 1 : 0;
     }
 
     public void InitPowerPoints(int powerPoints, int maxPowerAllowed) {

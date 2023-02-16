@@ -79,12 +79,12 @@ public class GameManager : MonoBehaviour {
     }
 
     void IncreaseMaxHealthStatus() {
-        _currentGameState.PlayerMaxHealth += (_currentGameState.PlayerMaxHealth + 1) < _maxHealthAllowed ? 1 : 0;
+        _currentGameState.PlayerMaxHealth += (_currentGameState.PlayerMaxHealth + 1) <= _maxHealthAllowed ? 1 : 0;
         // TODO: Update UI showing a new max health pack
     }
 
     void IncreaseMaxPowerStatus() {
-        _currentGameState.PlayerPowerLevel += (_currentGameState.PlayerPowerLevel + 1) < _maxPowerAllowed ? 1 : 0;
+        _currentGameState.PlayerPowerLevel += (_currentGameState.PlayerPowerLevel + 1) <= _maxPowerAllowed ? 1 : 0;
         // TODO: Update UI showing a new max power level
     }
 

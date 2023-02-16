@@ -846,7 +846,9 @@ MonoBehaviour:
   _initialGameState:
     PlayerScore: 0
     PlayerMaxHealth: 3
+    PlayerCurrentHealth: 0
     PlayerPowerLevel: 1
+    PlayerCurrentPower: 0
     WaveReached: 1
   _maxHealthAllowed: 5
   _maxPowerAllowed: 3

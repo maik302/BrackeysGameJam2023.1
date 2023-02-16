@@ -47,7 +47,7 @@ public class PlayerHealthBehaviour : MonoBehaviour {
     }
 
     public void IncreaseMaxHealthPoints() {
-        _maxHealthPoints += ((_maxHealthPoints + 1) < _maxHealthAllowed) ? 1 : 0;
+        _maxHealthPoints += ((_maxHealthPoints + 1) <= _maxHealthAllowed) ? 1 : 0;
         // Every time a Max Health pickup is grabbed by the player, their health will match the new current max health
         if (_healthPoints < _maxHealthPoints) {
             Messenger<int>.Broadcast(GameEvents.PlayerHealthIncreasedEvent, _maxHealthPoints - _healthPoints);
