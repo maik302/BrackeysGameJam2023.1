@@ -48,7 +48,17 @@ public class GameManager : MonoBehaviour {
 
     void Awake() {
         // Only when starting anew, use the initial values set for the game state
-        _currentGameState = _initialGameState;
+        _currentGameState = new GameState(
+            _initialGameState.PlayerScore,
+            _initialGameState.PlayerMaxHealth,
+            _initialGameState.PlayerCurrentHealth,
+            _initialGameState.PlayerMaxPower,
+            _initialGameState.PlayerCurrentPower,
+            _initialGameState.WaveReached,
+            0,
+            0,
+            0
+        );
     }
 
     // Start is called before the first frame update
@@ -65,7 +75,7 @@ public class GameManager : MonoBehaviour {
 
             var playerShootingBehaviour = _player.transform.GetComponent<PlayerShootingBehaviour>();
             if (playerShootingBehaviour != null) {
-                playerShootingBehaviour.InitPowerPoints(_currentGameState.PlayerPowerLevel, _maxPowerAllowed);
+                playerShootingBehaviour.InitPowerPoints(_currentGameState.PlayerMaxPower, _maxPowerAllowed);
             }
         }
 
@@ -84,7 +94,7 @@ public class GameManager : MonoBehaviour {
     }
 
     void IncreaseMaxPowerStatus() {
-        _currentGameState.PlayerPowerLevel += (_currentGameState.PlayerPowerLevel + 1) <= _maxPowerAllowed ? 1 : 0;
+        _currentGameState.PlayerMaxPower += (_currentGameState.PlayerMaxPower + 1) <= _maxPowerAllowed ? 1 : 0;
         // TODO: Update UI showing a new max power level
     }
 
@@ -105,5 +115,53 @@ public class GameManager : MonoBehaviour {
 
     void EndCurrentGame() {
         // TODO: Show UI for restarting a game with modifiers or go back to main menu
-    } 
+    }
+
+    void RestartGameWithPreviousMaxHealth() {
+        _currentGameState = new GameState(
+            _initialGameState.PlayerScore,
+            _currentGameState.PlayerMaxHealth,
+            _initialGameState.PlayerCurrentHealth,
+            _initialGameState.PlayerMaxPower,
+            _initialGameState.PlayerCurrentPower,
+            _initialGameState.WaveReached,
+            _currentGameState.MaxHealthModifiersCount + 1,
+            _currentGameState.MaxPowerModifiersCount,
+            _currentGameState.ScoreModifiersCount
+        );
+        // TODO: Destroy all enemies
+        // TODO: Restart WaveManager and Spawners
+    }
+
+    void RestartGameWithPreviousMaxPower() {
+        _currentGameState = new GameState(
+            _initialGameState.PlayerScore,
+            _initialGameState.PlayerMaxHealth,
+            _initialGameState.PlayerCurrentHealth,
+            _currentGameState.PlayerMaxPower,
+            _initialGameState.PlayerCurrentPower,
+            _initialGameState.WaveReached,
+            _currentGameState.MaxHealthModifiersCount,
+            _currentGameState.MaxPowerModifiersCount + 1,
+            _currentGameState.ScoreModifiersCount
+        );
+        // TODO: Destroy all enemies
+        // TODO: Restart WaveManager and Spawners
+    }
+
+    void RestartGameWithPreviousScore() {
+        _currentGameState = new GameState(
+            _currentGameState.PlayerScore,
+            _initialGameState.PlayerMaxHealth,
+            _initialGameState.PlayerCurrentHealth,
+            _initialGameState.PlayerMaxPower,
+            _initialGameState.PlayerCurrentPower,
+            _initialGameState.WaveReached,
+            _currentGameState.MaxHealthModifiersCount,
+            _currentGameState.MaxPowerModifiersCount,
+            _currentGameState.ScoreModifiersCount + 1
+        );
+        // TODO: Destroy all enemies
+        // TODO: Restart WaveManager and Spawners
+    }
 }
