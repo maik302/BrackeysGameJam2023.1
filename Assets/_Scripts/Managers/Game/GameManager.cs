@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class GameManager : MonoBehaviour {
 
@@ -104,16 +105,30 @@ public class GameManager : MonoBehaviour {
     }
 
     void IncreaseCurrentHealth(int healthPoints) {
-        _currentGameState.PlayerCurrentHealth += healthPoints;
+        _currentGameState.PlayerCurrentHealth += (healthPoints + healthPoints) <= _currentGameState.PlayerMaxHealth ? healthPoints : 0;
         // TODO: Update UI health points
     }
 
     void ReduceCurrentHealth() {
-        _currentGameState.PlayerCurrentHealth--;
+        _currentGameState.PlayerCurrentHealth = (_currentGameState.PlayerCurrentHealth - 1) <= 0 ? 0 : _currentGameState.PlayerCurrentHealth - 1;
         // TODO: Update UI health points
     }
 
     void EndCurrentGame() {
+        void SaveCurrentStateToPlayerPrefs() {
+            // Get the current high scores to save only the GameValues.MaxHighScoresToSave 
+            var highScoresHolder = PlayerPrefsUtils.GetHighScoresFromPlayerPrefs();
+            if (highScoresHolder == null) {
+                highScoresHolder = new HighScoresHolder();
+            }
+            highScoresHolder.Add(_currentGameState);
+            highScoresHolder.SortDescending();
+            var updatedHighScoresHolder = new HighScoresHolder(highScoresHolder.Take(GameValues.MaxHighScoresToSave));
+
+            PlayerPrefsUtils.SaveHighScoresToPlayerPrefs(updatedHighScoresHolder);
+        }
+
+        SaveCurrentStateToPlayerPrefs();
         // TODO: Show UI for restarting a game with modifiers or go back to main menu
     }
 

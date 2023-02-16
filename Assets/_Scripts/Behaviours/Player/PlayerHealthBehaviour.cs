@@ -27,9 +27,9 @@ public class PlayerHealthBehaviour : MonoBehaviour {
     }
 
     public void TakeDamage() {
-        _healthPoints--;
+        _healthPoints = ((_healthPoints - 1) <= 0) ? 0 : _healthPoints - 1;
         Messenger.Broadcast(GameEvents.PlayerTookDamageEvent);
-        if (_healthPoints <= 0) {
+        if (_healthPoints == 0) {
             Die();
         }
     }
