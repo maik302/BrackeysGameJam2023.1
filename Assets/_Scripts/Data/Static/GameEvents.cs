@@ -6,4 +6,5 @@ public static class GameEvents {
     public const string HealthPickupGrabbedEvent = "HealthPickupGrabbedEvent";
     public const string MaxHealthPickupGrabbedEvent = "MaxHealthPickupGrabbedEvent";
     public const string PowerUpPickupGrabbedEvent = "PowerUpPickupGrabbedEvent";
+    public const string EnemyDestroyedEvent = "EnemyDestroyedEvent";
 }
