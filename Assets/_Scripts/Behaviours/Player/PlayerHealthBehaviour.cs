@@ -14,10 +14,16 @@ public class PlayerHealthBehaviour : MonoBehaviour {
 
     void OnEnable() {
         Messenger.AddListener(GameEvents.HealthPickupGrabbedEvent, RestoreHealth);
+        Messenger.AddListener(GameEvents.MaxHealthPickupGrabbedEvent, IncreaseMaxHealthPoints);
     }
 
     void OnDisable() {
         Messenger.RemoveListener(GameEvents.HealthPickupGrabbedEvent, RestoreHealth);
+        Messenger.RemoveListener(GameEvents.MaxHealthPickupGrabbedEvent, IncreaseMaxHealthPoints);
+    }
+
+    void Start() {
+        _healthPoints = (_healthPoints > _maxHealthPoints) ? _maxHealthPoints : _healthPoints;
     }
 
     public void TakeDamage() {
@@ -29,15 +35,23 @@ public class PlayerHealthBehaviour : MonoBehaviour {
 
     void Die() {
         Destroy(gameObject);
-        // TODO Report to GameManager that the current round has finished!
+        // TODO: Report to GameManager that the current round has finished!
     }
 
     public void RestoreHealth() {
-        _healthPoints += ((_healthPoints + 1) < _maxHealthPoints) ? 1 : 0;
+        if (_healthPoints + 1 < _maxHealthPoints) {
+            _healthPoints++;
+            Messenger<int>.Broadcast(GameEvents.PlayerHealthIncreasedEvent, 1);
+        }
     }
 
     public void IncreaseMaxHealthPoints() {
         _maxHealthPoints += ((_maxHealthPoints + 1) < _maxHealthAllowed) ? 1 : 0;
+        // Every time a Max Health pickup is grabbed by the player, their health will match the new current max health
+        if (_healthPoints < _maxHealthPoints) {
+            Messenger<int>.Broadcast(GameEvents.PlayerHealthIncreasedEvent, _maxHealthPoints - _healthPoints);
+            _healthPoints = _maxHealthPoints;
+        }
     }
 
     public void InitHealthPoints(int maxHealthPoints, int maxHealthAllowed) {

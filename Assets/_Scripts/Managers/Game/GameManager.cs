@@ -22,12 +22,14 @@ public class GameManager : MonoBehaviour {
         Messenger.AddListener(GameEvents.MaxHealthPickupGrabbedEvent, IncreaseMaxHealthStatus);
         Messenger.AddListener(GameEvents.PowerUpPickupGrabbedEvent, IncreaseMaxPowerStatus);
         Messenger<int>.AddListener(GameEvents.EnemyDestroyedEvent, IncreaseScore);
+        Messenger<int>.AddListener(GameEvents.PlayerHealthIncreasedEvent, IncreaseCurrentHealth);
     }
 
     void OnDisable() {
         Messenger.RemoveListener(GameEvents.MaxHealthPickupGrabbedEvent, IncreaseMaxHealthStatus);
         Messenger.RemoveListener(GameEvents.PowerUpPickupGrabbedEvent, IncreaseMaxPowerStatus);
         Messenger<int>.RemoveListener(GameEvents.EnemyDestroyedEvent, IncreaseScore);
+        Messenger<int>.RemoveListener(GameEvents.PlayerHealthIncreasedEvent, IncreaseCurrentHealth);
     }
 
     void Awake() {
@@ -75,5 +77,9 @@ public class GameManager : MonoBehaviour {
     void IncreaseScore(int newScoredPoints) {
         _currentGameState.PlayerScore += newScoredPoints;
         // TODO: Update UI showing the new score
+    }
+
+    void IncreaseCurrentHealth(int healthPoints) {
+        // TODO: Update UI Adding new health points
     }
 }
