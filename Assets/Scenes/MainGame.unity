@@ -368,7 +368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 901e9312d0bcf784889cce546fddb535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealthPoints: 3
+  _maxHealthPoints: 5
   _healthPoints: 3
 --- !u!1 &375913229
 GameObject:
@@ -495,7 +495,7 @@ GameObject:
   - component: {fileID: 700166642}
   m_Layer: 0
   m_Name: DownBoundary
-  m_TagString: Untagged
+  m_TagString: DownBoundary
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

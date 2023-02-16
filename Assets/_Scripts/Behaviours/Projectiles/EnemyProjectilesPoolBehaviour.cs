@@ -46,7 +46,7 @@ public class EnemyProjectilesPoolBehaviour : MonoBehaviour {
                     playerHealthBehaviour.TakeDamage();
                 }
                 _projectilesPool.Release(projectile);
-            } else if (!collider.gameObject.CompareTag(GameTags.EnemyTag)) {
+            } else if (!collider.gameObject.CompareTag(GameTags.PickupItemTag) || !collider.gameObject.CompareTag(GameTags.EnemyTag)) {
                 _projectilesPool.Release(projectile);
             }
         }
