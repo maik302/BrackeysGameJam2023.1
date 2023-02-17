@@ -1119,7 +1119,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2106944912}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1138,7 +1138,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4145d0a49cacc6547922fe6ed3618c9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnerPosition: {fileID: 2074196183}
   _maxHealthItemPrefab: {fileID: 4406160547456038314, guid: e6244749c535f5a46a5266b6533c8044, type: 3}
   _powerUpItemPrefab: {fileID: 6670080928755948266, guid: a5a76b975629e5b49a8d97b2f83cc0a8, type: 3}
   _healthPrefab: {fileID: 7443304640824381034, guid: ceea462796f67a1418609d4c864b1092, type: 3}

@@ -6,9 +6,6 @@ using System.Linq;
 
 public class PickupItemsSpawnerBehaviour : MonoBehaviour, ISpawner {
 
-    [SerializeField]
-    Transform _spawnerPosition;    
-
     [Header("Items Prefabs")]
     [SerializeField]
     GameObject _maxHealthItemPrefab;
@@ -87,7 +84,7 @@ public class PickupItemsSpawnerBehaviour : MonoBehaviour, ISpawner {
 
     void InstantiateAnItem(GameObject itemPrefab) {
         var spawnXPos = GetRandomBoundedSpawnPosX();
-        Instantiate(itemPrefab, new Vector2(spawnXPos, _spawnerPosition.position.y), Quaternion.identity);
+        Instantiate(itemPrefab, new Vector2(spawnXPos, transform.position.y), Quaternion.identity);
         _previousItemSpawnedXPos = spawnXPos;
 
         _spawnedItems++;
