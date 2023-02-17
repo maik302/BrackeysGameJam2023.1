@@ -1242,8 +1242,8 @@ MonoBehaviour:
   _enemyType1BottomMovementBoundary: {fileID: 985195075}
   _enemyType2Prefab: {fileID: 8689621557393012345, guid: 74199ef17af232a45823a33148b86755, type: 3}
   _enemyType2BottomSpawnPointBoundary: {fileID: 1074245976}
-  _enemyType3Prefab: {fileID: 0}
-  _enemyType3BottomMovementBoundary: {fileID: 0}
+  _enemyType3Prefab: {fileID: 7389582496206754029, guid: db0c9f1edd3e8fd4b8e76692ac18f6f7, type: 3}
+  _enemyType3BottomMovementBoundary: {fileID: 1938323144}
   _topBoundaryTransform: {fileID: 821326497}
   _bottomBoundaryTransform: {fileID: 700166641}
   _leftBoundaryTransform: {fileID: 838344046}

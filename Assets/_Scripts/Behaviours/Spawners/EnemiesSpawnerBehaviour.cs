@@ -43,9 +43,9 @@ public class EnemiesSpawnerBehaviour : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        InstantiateEnemyType2();
-        InstantiateEnemyType2();
-        InstantiateEnemyType2();
+        InstantiateEnemyType3();
+        InstantiateEnemyType3();
+        InstantiateEnemyType3();
     }
 
     // Update is called once per frame
@@ -88,6 +88,16 @@ public class EnemiesSpawnerBehaviour : MonoBehaviour {
         var enemyType2MovementBehaviour = enemyInstance.transform.GetComponent<EnemyType2MovementBehaviour>();
         if (enemyType2MovementBehaviour != null) {
             enemyType2MovementBehaviour.Init(_leftBoundaryTransform, _rightBoundaryTransform);
+        }
+    }
+
+    void InstantiateEnemyType3() {
+        var spawnXPos = GetRandomBoundedSpawnPosX();
+
+        var enemyInstance = Instantiate(_enemyType3Prefab, new Vector2(spawnXPos, _topSpawner.position.y), Quaternion.identity);
+        var enemyType6MovementBehaviour = enemyInstance.transform.GetComponent<EnemyType3MovementBehaviour>();
+        if (enemyType6MovementBehaviour != null) {
+            enemyType6MovementBehaviour.Init(_enemyType3BottomMovementBoundary);
         }
     }
 }
