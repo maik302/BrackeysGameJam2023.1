@@ -20,7 +20,7 @@ public class PickupItemsSpawnerBehaviour : MonoBehaviour, ISpawner {
     [SerializeField]
     Transform _rightBoundaryTransform;
     [SerializeField]
-    float _offestFromBoundaries = 1f;
+    float _offsetFromBoundaries = 1f;
     
     int _spawnedItems;
     float _previousItemSpawnedXPos;
@@ -76,11 +76,11 @@ public class PickupItemsSpawnerBehaviour : MonoBehaviour, ISpawner {
         }
     }
 
-    public void InstantiateMaxHealthItem() => InstantiateAnItem(_maxHealthItemPrefab);
+    void InstantiateMaxHealthItem() => InstantiateAnItem(_maxHealthItemPrefab);
 
-    public void InstantiatePowerUpItem() => InstantiateAnItem(_powerUpItemPrefab);
+    void InstantiatePowerUpItem() => InstantiateAnItem(_powerUpItemPrefab);
 
-    public void InstantiateHealthItem() => InstantiateAnItem(_healthPrefab);
+    void InstantiateHealthItem() => InstantiateAnItem(_healthPrefab);
 
     void InstantiateAnItem(GameObject itemPrefab) {
         var spawnXPos = GetRandomBoundedSpawnPosX();
@@ -94,7 +94,7 @@ public class PickupItemsSpawnerBehaviour : MonoBehaviour, ISpawner {
         float spawnXPos;
         
         do {
-            spawnXPos = UnityEngine.Random.Range(_leftBoundaryTransform.position.x + _offestFromBoundaries, _rightBoundaryTransform.position.x - _offestFromBoundaries);
+            spawnXPos = UnityEngine.Random.Range(_leftBoundaryTransform.position.x + _offsetFromBoundaries, _rightBoundaryTransform.position.x - _offsetFromBoundaries);
         } while (spawnXPos == _previousItemSpawnedXPos);
         
         _previousItemSpawnedXPos = spawnXPos;
