@@ -163,7 +163,7 @@ public class EnemiesSpawnerBehaviour : MonoBehaviour, ISpawner {
         } else {
             var columnToSpawnIn = UnityEngine.Random.Range(0, unoccupiedColumns.Count);
             // Displaces (or translates) the column index to the actual world position
-            var columnToSpawnInXPos = unoccupiedColumns[columnToSpawnIn] - (_rightBoundaryTransform.position.x + _offsetFromBoundaries);
+            var columnToSpawnInXPos = unoccupiedColumns[columnToSpawnIn] - _rightBoundaryTransform.position.x + _offsetFromBoundaries;
 
             return (unoccupiedColumns[columnToSpawnIn], columnToSpawnInXPos);
         }

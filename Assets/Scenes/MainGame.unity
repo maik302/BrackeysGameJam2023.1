@@ -498,13 +498,13 @@ MonoBehaviour:
     EnemyRowsConfigurations:
     - EnemyType: 0
       EnemyHealth: 3
-      MaxEnemiesToSpawn: 2
+      MaxEnemiesToSpawn: 6
     - EnemyType: 1
       EnemyHealth: 3
-      MaxEnemiesToSpawn: 3
+      MaxEnemiesToSpawn: 0
     - EnemyType: 2
       EnemyHealth: 3
-      MaxEnemiesToSpawn: 2
+      MaxEnemiesToSpawn: 3
 --- !u!4 &591402445
 Transform:
   m_ObjectHideFlags: 0
