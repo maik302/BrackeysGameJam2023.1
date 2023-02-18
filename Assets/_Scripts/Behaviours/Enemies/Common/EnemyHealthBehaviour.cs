@@ -11,6 +11,12 @@ public class EnemyHealthBehaviour : MonoBehaviour {
     int _scoreMultiplier = 100;
 
     int _baseHealthPoints;
+    Vector2 _spawnedPositionDescriptor;
+
+    public void Init(int healthPoints, Vector2 spawnPositionDescriptor) {
+        _healthPoints = healthPoints;
+        _spawnedPositionDescriptor = spawnPositionDescriptor;
+    }
 
     void Start() {
         _baseHealthPoints = _healthPoints;
@@ -25,14 +31,7 @@ public class EnemyHealthBehaviour : MonoBehaviour {
 
     void Die() {
         Messenger<int>.Broadcast(GameEvents.EnemyDestroyedEvent, _baseHealthPoints * _scoreMultiplier);
+        Messenger<Vector2>.Broadcast(GameEvents.EnemySpawningPositionFreedEvent, _spawnedPositionDescriptor);
         Destroy(gameObject);
-    }
-
-    public void SetHealthPoints(int healthPoints) {
-        _healthPoints = healthPoints;
-    }
-
-    public void SetScoreMultiplier(int scoreMultiplier) {
-        _scoreMultiplier = scoreMultiplier;
     }
 }

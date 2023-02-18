@@ -97,13 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b7234e92da22442a0427e42900bcd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementSpeed: 5
+  _movementSpeed: 1
   _rotationSpeed: 0.05
-  _boundaries:
-    UpBoundary: {fileID: 0}
-    DownBoundary: {fileID: 0}
-    LeftBoundary: {fileID: 0}
-    RightBoundary: {fileID: 0}
   _playerSpriteRenderer: {fileID: 7389582496401694612}
 --- !u!114 &7389582496206754019
 MonoBehaviour:
@@ -133,6 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthPoints: 3
+  _scoreMultiplier: 100
 --- !u!1 &7389582496401694618
 GameObject:
   m_ObjectHideFlags: 0

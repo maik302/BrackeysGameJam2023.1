@@ -9,14 +9,20 @@ public class EnemyType3MovementBehaviour : MonoBehaviour {
     [SerializeField]
     float _rotationSpeed = 5f;
     [SerializeField]
-    Boundaries _boundaries;
-    [SerializeField]
     SpriteRenderer _playerSpriteRenderer;
+
+    Transform _bottomBoundary;
+    Vector2 _initialPosition;
 
     float _spriteMiddlePoint;
     bool _hasStoppedMoving;
     bool _hasStartedShooting;
     EnemyType3ShootingBehaviour _shootingBehaviour;
+
+    public void Init(Transform bottomBoundary) {
+        _bottomBoundary = bottomBoundary;
+        _initialPosition = new Vector2(transform.position.x, transform.position.y);
+    }
 
     void Awake() {
         // Get the middle point of the square-shapped sprite of this GameObject
@@ -48,14 +54,14 @@ public class EnemyType3MovementBehaviour : MonoBehaviour {
 
     void Move(Vector2 direction) {
         var movementDirection = direction * _movementSpeed * Time.deltaTime;
-        var newYPosition = Mathf.Clamp(transform.position.y + movementDirection.y, _boundaries.DownBoundary.position.y + _spriteMiddlePoint, _boundaries.UpBoundary.position.y - _spriteMiddlePoint); 
+        var newYPosition = Mathf.Clamp(transform.position.y + movementDirection.y, _bottomBoundary.position.y + _spriteMiddlePoint, _initialPosition.y); 
         var boundedMovementDirection = new Vector2(
             transform.position.x + movementDirection.x,
             newYPosition
         );
 
         transform.position = boundedMovementDirection;
-        _hasStoppedMoving = newYPosition == (_boundaries.DownBoundary.position.y + _spriteMiddlePoint);
+        _hasStoppedMoving = newYPosition == (_bottomBoundary.position.y + _spriteMiddlePoint);
     }
 
     void Rotate() {

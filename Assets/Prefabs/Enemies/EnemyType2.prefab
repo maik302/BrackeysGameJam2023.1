@@ -212,12 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec305e917faf032469f3ebb3a34e45a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 0.2
-  _boundaries:
-    UpBoundary: {fileID: 0}
-    DownBoundary: {fileID: 0}
-    LeftBoundary: {fileID: 0}
-    RightBoundary: {fileID: 0}
+  _speed: 1
   _playerSpriteRenderer: {fileID: 8689621557180512512}
 --- !u!114 &8689621557393012340
 MonoBehaviour:
@@ -226,7 +221,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8689621557393012345}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b9b3e57da3b47a94f82fc2e8a8b92c16, type: 3}
   m_Name: 
@@ -245,3 +240,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthPoints: 3
+  _scoreMultiplier: 100
