@@ -699,7 +699,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2c14f4da925df8e4c9e0b07b5e554a38, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7e7ce52e2d3f16e41b36301e2c21d036, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1653,7 +1653,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2c14f4da925df8e4c9e0b07b5e554a38, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7e7ce52e2d3f16e41b36301e2c21d036, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2105,9 +2105,9 @@ MonoBehaviour:
   - MaxItemsToSpawn: 3
     MinSpawnFrequency: 1
     MaxSpawnFrequency: 1
-    ProbabilityForMaxHealth: 0.5
+    ProbabilityForMaxHealth: 0.9
     ProbabilityForPowerUp: 0.5
-    ProbabilityForHealth: 0.9
+    ProbabilityForHealth: 0.5
   _enemiesSpawner: {fileID: 2098825194}
   _enemyWavesConfiguration:
   - EnemiesInGameThreshold: 4
@@ -2116,13 +2116,13 @@ MonoBehaviour:
     MinEnemyRowsSpawnFrequency: 1
     MaxEnemyRowsSpawnFrequency: 5
     EnemyRowsConfigurations:
-    - EnemyType: 2
+    - EnemyType: 0
       EnemyHealth: 1
       MaxEnemiesToSpawn: 1
-    - EnemyType: 2
+    - EnemyType: 0
       EnemyHealth: 1
       MaxEnemiesToSpawn: 1
-    - EnemyType: 2
+    - EnemyType: 0
       EnemyHealth: 1
       MaxEnemiesToSpawn: 1
 --- !u!4 &591402445
