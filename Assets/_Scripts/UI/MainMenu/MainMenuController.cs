@@ -4,10 +4,10 @@ using UnityEngine.SceneManagement;
 public class MainMenuController : MonoBehaviour {
 
     public void GoToMainGameScene() {
-        SceneManager.LoadScene("MainGame");
+        SceneManager.LoadScene(ScenesNames.MainGameScene);
     }
 
     public void GoToHighScoresScene() {
-        SceneManager.LoadScene("HighScores");
+        SceneManager.LoadScene(ScenesNames.HighScoresScene);
     }
 }

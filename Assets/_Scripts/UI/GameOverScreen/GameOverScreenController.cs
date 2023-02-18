@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameOverScreenController : MonoBehaviour {
     [SerializeField]
@@ -34,5 +35,9 @@ public class GameOverScreenController : MonoBehaviour {
 
     public void RestartGameWithPreviousScore() {
         Messenger.Broadcast(GameEvents.RestartGameWithPreviousScoreEvent);
+    }
+
+    public void GoToMainMenu() {
+        SceneManager.LoadScene(ScenesNames.MainMenuScene);
     }
 }

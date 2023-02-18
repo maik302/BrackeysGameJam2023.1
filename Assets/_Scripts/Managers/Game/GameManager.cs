@@ -139,6 +139,7 @@ public class GameManager : MonoBehaviour {
             _powerPointsUIController.SetPowerPoints(_currentGameState.PlayerMaxPower);
         }
 
+        Time.timeScale = 1f;
         InitPlayer();
         InitUI();
         _wavesManager.StartGame();
@@ -283,9 +284,7 @@ public class GameManager : MonoBehaviour {
     }
 
     void ResetGame() {
-        _gameOverScreen.SetActive(false);
-        Time.timeScale = 1f;
-        
+        _gameOverScreen.SetActive(false);        
         InitGame();
     }
 }
