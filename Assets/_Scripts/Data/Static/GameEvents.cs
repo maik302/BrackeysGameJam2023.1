@@ -11,4 +11,5 @@ public static class GameEvents {
     public const string PlayerTookDamageEvent = "PlayerTookDamageEvent";
     public const string PlayerDiedEvent = "PlayerDiedEvent";
     public const string EnemySpawningPositionFreedEvent = "EnemySpawningPositionFreedEvent";
+    public const string NewWaveStartedEvent = "NewWaveStartedEvent";
 }

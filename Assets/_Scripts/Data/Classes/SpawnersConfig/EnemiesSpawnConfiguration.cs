@@ -24,7 +24,33 @@ public class EnemiesSpawnConfiguration {
     [SerializeField]
     public List<EnemyRowSpawnConfiguration> EnemyRowsConfigurations;
 
+    public EnemiesSpawnConfiguration(int enemiesInGameThreshold, float minSpawnFrequency, float maxSpawnFrequency, float minEnemyRowsSpawnFrequency, float maxEnemyRowsSpawnFrequency, List<EnemyRowSpawnConfiguration> enemyRowsConfigurations)
+    {
+        EnemiesInGameThreshold = enemiesInGameThreshold;
+        MinSpawnFrequency = minSpawnFrequency;
+        MaxSpawnFrequency = maxSpawnFrequency;
+        MinEnemyRowsSpawnFrequency = minEnemyRowsSpawnFrequency;
+        MaxEnemyRowsSpawnFrequency = maxEnemyRowsSpawnFrequency;
+        EnemyRowsConfigurations = enemyRowsConfigurations;
+    }
+
     public int GetTotalEnemies() {
         return EnemyRowsConfigurations.Select(row => row.MaxEnemiesToSpawn).Sum();
+    }
+
+    public EnemiesSpawnConfiguration GetCopy() {
+        var enemyRowsConfigurationsCopy = new List<EnemyRowSpawnConfiguration>();
+        this.EnemyRowsConfigurations.ForEach(configuration => {
+            enemyRowsConfigurationsCopy.Add(configuration.GetCopy());
+        });
+
+        return new EnemiesSpawnConfiguration(
+            this.EnemiesInGameThreshold,
+            this.MinSpawnFrequency,
+            this.MaxSpawnFrequency,
+            this.MinEnemyRowsSpawnFrequency,
+            this.MaxEnemyRowsSpawnFrequency,
+            enemyRowsConfigurationsCopy
+        );
     }
 }

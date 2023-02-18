@@ -482,6 +482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 681cb976b485dfd4cafea6286d82e18e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _waveToStartHardMode: 2
   _pickupItemsSpawner: {fileID: 2106944914}
   _pickupItemsWavesConfiguration:
   - MaxItemsToSpawn: 3
@@ -499,14 +500,14 @@ MonoBehaviour:
     MaxEnemyRowsSpawnFrequency: 5
     EnemyRowsConfigurations:
     - EnemyType: 0
-      EnemyHealth: 3
-      MaxEnemiesToSpawn: 3
-    - EnemyType: 1
-      EnemyHealth: 3
-      MaxEnemiesToSpawn: 3
-    - EnemyType: 2
-      EnemyHealth: 3
-      MaxEnemiesToSpawn: 2
+      EnemyHealth: 1
+      MaxEnemiesToSpawn: 1
+    - EnemyType: 0
+      EnemyHealth: 1
+      MaxEnemiesToSpawn: 1
+    - EnemyType: 0
+      EnemyHealth: 1
+      MaxEnemiesToSpawn: 1
 --- !u!4 &591402445
 Transform:
   m_ObjectHideFlags: 0
@@ -1282,7 +1283,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2106944913
 Transform:
   m_ObjectHideFlags: 0

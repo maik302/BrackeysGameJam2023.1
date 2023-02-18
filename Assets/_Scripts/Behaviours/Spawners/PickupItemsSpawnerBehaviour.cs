@@ -27,7 +27,7 @@ public class PickupItemsSpawnerBehaviour : MonoBehaviour, ISpawner {
     PickupItemsSpawnConfiguration _currentConfiguration;
 
     public void Init(PickupItemsSpawnConfiguration configuration) {
-        _currentConfiguration = configuration.GetCopy();
+        _currentConfiguration = configuration;
         ClearSpawnedItemsCount();
     }
 
