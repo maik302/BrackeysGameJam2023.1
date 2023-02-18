@@ -991,7 +991,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &170930812
 Transform:
   m_ObjectHideFlags: 0
@@ -3224,7 +3224,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &948455928
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3262,11 +3262,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33da4bf2f4a25274b9b8e57d52d49650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _finalScoreText: {fileID: 0}
-  _finalWavesText: {fileID: 0}
-  _maxHealthModifiersCountText: {fileID: 0}
-  _powerModifiersCountText: {fileID: 0}
-  _scoreModifiersCountText: {fileID: 0}
+  _finalScoreText: {fileID: 694051000}
+  _finalWavesText: {fileID: 1631009090}
+  _maxHealthModifiersCountText: {fileID: 894700548}
+  _powerModifiersCountText: {fileID: 1396717458}
+  _scoreModifiersCountText: {fileID: 271557525}
 --- !u!1 &985195074
 GameObject:
   m_ObjectHideFlags: 0
@@ -4048,6 +4048,7 @@ MonoBehaviour:
   _waveCounterText: {fileID: 1743167687}
   _healthPointsUIController: {fileID: 1542276198}
   _powerPointsUIController: {fileID: 1199301040}
+  _gameOverScreen: {fileID: 948455927}
 --- !u!1 &1319394593
 GameObject:
   m_ObjectHideFlags: 0

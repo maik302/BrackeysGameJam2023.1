@@ -5,4 +5,5 @@ public static class GameTags {
     public const string EnemyTag = "Enemy";
     public const string DownBoundaryTag = "DownBoundary";
     public const string PickupItemTag = "PickupItem";
+    public const string ProjectileTag = "ProjectileTag";
 }

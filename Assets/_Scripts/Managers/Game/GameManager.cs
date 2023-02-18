@@ -30,6 +30,9 @@ public class GameManager : MonoBehaviour {
     HealthPointsController _healthPointsUIController;
     [SerializeField]
     PowerPointsController _powerPointsUIController;
+    [Header("Game Over results screen")]
+    [SerializeField]
+    GameObject _gameOverScreen;
 
     GameState _currentGameState;
 
@@ -157,8 +160,44 @@ public class GameManager : MonoBehaviour {
             PlayerPrefsUtils.SaveHighScoresToPlayerPrefs(updatedHighScoresHolder);
         }
 
+        void ShowGameOverScreen() {
+            _gameOverScreen.SetActive(true);
+
+            var gameOverScreenController = _gameOverScreen.transform.GetComponent<GameOverScreenController>();
+            if (gameOverScreenController != null) {
+                gameOverScreenController.SetFinalResults(_currentGameState);
+            }
+        }
+
+        void DeleteAllElementsOnScreen() {
+            var enemyObjects = GameObject.FindGameObjectsWithTag(GameTags.EnemyTag);
+            if (enemyObjects != null) {
+                foreach (var enemy in enemyObjects) {
+                    Destroy(enemy);
+                }
+            }
+
+            var pickupItemObjects = GameObject.FindGameObjectsWithTag(GameTags.PickupItemTag);
+            if (pickupItemObjects != null) {
+                foreach (var pickupItem in pickupItemObjects) {
+                    Destroy(pickupItem);
+                }
+            }
+
+            var projectileObjects = GameObject.FindGameObjectsWithTag(GameTags.ProjectileTag);
+            if (projectileObjects != null) {
+                foreach (var projectile in projectileObjects) {
+                    Destroy(projectile);
+                }
+            }
+        }
+
         SaveCurrentStateToPlayerPrefs();
-        // TODO: Show UI for restarting a game with modifiers or go back to main menu
+        DeleteAllElementsOnScreen();
+
+        // Pause the game before showing the Game Over screen
+        Time.timeScale = 0f;
+        ShowGameOverScreen();
     }
 
     void RestartGameWithPreviousMaxHealth() {
@@ -207,6 +246,7 @@ public class GameManager : MonoBehaviour {
     }
 
     void StartNewWave(int waveNumber) {
+        _currentGameState.WaveReached = waveNumber;
         _waveCounterText.text = GameTexts.WaveText + (waveNumber + 1).ToString("D2");
     }
 }

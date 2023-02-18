@@ -22,7 +22,5 @@ public class GameOverScreenController : MonoBehaviour {
         _maxHealthModifiersCountText.text = finalGameState.MaxHealthModifiersCount.ToString("D2");
         _powerModifiersCountText.text = finalGameState.MaxPowerModifiersCount.ToString("D2");
         _scoreModifiersCountText.text = finalGameState.ScoreModifiersCount.ToString("D2");
-
-        enabled = true;
     }
 }
