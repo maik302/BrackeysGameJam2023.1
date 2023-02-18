@@ -157,8 +157,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -103.36334, y: -22.333496}
-  m_SizeDelta: {x: 186.7266, y: 23.9805}
+  m_AnchoredPosition: {x: -174.96948, y: -22.333496}
+  m_SizeDelta: {x: 329.939, y: 23.9805}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &17082238
 GameObject:
@@ -1507,8 +1507,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'score:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 00fc8dd014c8c81499ca858aa19c49c5, type: 2}
+  m_sharedMaterial: {fileID: -3274657623610967346, guid: 00fc8dd014c8c81499ca858aa19c49c5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2247,8 +2247,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -103.36334, y: -46.313965}
-  m_SizeDelta: {x: 186.7266, y: 23.9805}
+  m_AnchoredPosition: {x: -174.96948, y: -46.313965}
+  m_SizeDelta: {x: 329.939, y: 23.9805}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1430763333
 GameObject:
@@ -2554,8 +2554,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'wave:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 00fc8dd014c8c81499ca858aa19c49c5, type: 2}
+  m_sharedMaterial: {fileID: -3274657623610967346, guid: 00fc8dd014c8c81499ca858aa19c49c5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
