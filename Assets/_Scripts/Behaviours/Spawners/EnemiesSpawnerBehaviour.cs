@@ -94,7 +94,7 @@ public class EnemiesSpawnerBehaviour : MonoBehaviour, ISpawner {
     }
 
     // For spawnning rows of enemies
-    IEnumerator Spawn() {
+    public IEnumerator Spawn() {
         var enemyRowsConfigurations = _currentConfiguration.EnemyRowsConfigurations;
         while (enemyRowsConfigurations.Count > 0) {
             var currentEnemyRowsConfig = enemyRowsConfigurations[0];
@@ -110,7 +110,7 @@ public class EnemiesSpawnerBehaviour : MonoBehaviour, ISpawner {
                         TryInstantiateEnemyType1(currentEnemyRowsConfig.EnemyHealth);
                         break;
                     case EnemyTypes.Type2:
-                        InstantiateEnemyType2();
+                        TryInstantiateEnemyType2(currentEnemyRowsConfig.EnemyHealth);
                         break;
                     case EnemyTypes.Type3:
                         InstantiateEnemyType3();
@@ -128,7 +128,7 @@ public class EnemiesSpawnerBehaviour : MonoBehaviour, ISpawner {
     void TryInstantiateEnemyType1(int healthPoints) {
         var (spawnColumn, spawnXPos) = GetRandomBoundedUnoccupiedSpawnXAxisSpace();
 
-        // Only spawns an enemy if theres an unoccupied column to do so
+        // Only spawns an enemy if there is an unoccupied column to do so
         if (spawnColumn >= 0) {
             _occupiedColumns[spawnColumn] = true;
 
@@ -163,15 +163,33 @@ public class EnemiesSpawnerBehaviour : MonoBehaviour, ISpawner {
         } else {
             var columnToSpawnIn = UnityEngine.Random.Range(0, unoccupiedColumns.Count);
             // Displaces (or translates) the column index to the actual world position
-            var columnToSpawnInXPos = unoccupiedColumns[columnToSpawnIn] - (_rightBoundaryTransform.position.x) + _offsetFromBoundaries;
+            var columnToSpawnInXPos = unoccupiedColumns[columnToSpawnIn] - (_rightBoundaryTransform.position.x + _offsetFromBoundaries);
 
             return (unoccupiedColumns[columnToSpawnIn], columnToSpawnInXPos);
         }
     }
 
-    void InstantiateEnemyType2() {
-        float GetRandomBoundedSpawnPosY() {
-            return UnityEngine.Random.Range((int) (_enemyType2BottomSpawnPointBoundary.position.y + _offsetFromBoundaries), (int) (_topBoundaryTransform.position.y - _offsetFromBoundaries) + 1);
+    void TryInstantiateEnemyType2(int healthPoints) {
+        (int, float) GetRandomBoundedUnoccupiedSpawnYAxisSpace() {
+            var rowIndex = 0;
+            var unoccupiedRows = _occupiedRows.Aggregate(new List<int>(), (acc, isRowOccupied) => {
+                if (!isRowOccupied) {
+                    acc.Add(rowIndex);
+                }
+                rowIndex++;
+
+                return acc;
+            });
+
+            if (unoccupiedRows.Count == 0) {
+                return (-1, -1f);
+            } else {
+                var rowToSpawnIn = UnityEngine.Random.Range(0, unoccupiedRows.Count);
+                // Displaces (or translates) the row index to the actual world position
+                var columnToSpawnInYPos = (_topBoundaryTransform.position.y - _offsetFromBoundaries) - unoccupiedRows[rowToSpawnIn];
+
+                return (unoccupiedRows[rowToSpawnIn], columnToSpawnInYPos);
+            }
         }
 
         Transform GetRandomLateralSpawner() {
@@ -180,16 +198,25 @@ public class EnemiesSpawnerBehaviour : MonoBehaviour, ISpawner {
         }
 
         var spawner = GetRandomLateralSpawner();
-        var spawnYPos = GetRandomBoundedSpawnPosY();
+        var (spawnRow, spawnYPos) = GetRandomBoundedUnoccupiedSpawnYAxisSpace();
 
-        var enemyInstance = Instantiate(
-            _enemyType2Prefab,
-            new Vector2(spawner.position.x, spawnYPos),
-            Quaternion.Euler(0f, 0f, (spawner.position.x <= 0) ? 90f : -90f)
-        );
-        var enemyType2MovementBehaviour = enemyInstance.transform.GetComponent<EnemyType2MovementBehaviour>();
-        if (enemyType2MovementBehaviour != null) {
-            enemyType2MovementBehaviour.Init(_leftBoundaryTransform, _rightBoundaryTransform);
+        // Only spawns an enemy if there is an unoccupied row to do so
+        if (spawnRow >= 0) {
+            _occupiedRows[spawnRow] = true;
+
+            var enemyInstance = Instantiate(
+                _enemyType2Prefab,
+                new Vector2(spawner.position.x, spawnYPos),
+                Quaternion.Euler(0f, 0f, (spawner.position.x <= 0) ? 90f : -90f)
+            );
+            var enemyType2MovementBehaviour = enemyInstance.transform.GetComponent<EnemyType2MovementBehaviour>();
+            var enemyHealtBehaviour = enemyInstance.transform.GetComponent<EnemyHealthBehaviour>();
+            if (enemyType2MovementBehaviour != null && enemyHealtBehaviour != null) {
+                enemyType2MovementBehaviour.Init(_leftBoundaryTransform, _rightBoundaryTransform);
+                enemyHealtBehaviour.Init(healthPoints, new Vector2(spawnRow, InvalidSpawnDescriptorIndex));
+            }
+
+            _currentEnemyRowSpawnedEnemiesCount++;
         }
     }
 
