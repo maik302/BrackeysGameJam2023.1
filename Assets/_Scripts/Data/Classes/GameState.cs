@@ -34,9 +34,9 @@ public class GameState : IComparable {
         int scoreModifiersCount) {
         PlayerScore = playerScore;
         PlayerMaxHealth = playerMaxHealth;
-        PlayerCurrentHealth = playerCurrentHealth;
+        PlayerCurrentHealth = playerMaxHealth;
         PlayerMaxPower = playerMaxPower;
-        PlayerCurrentPower = playerCurrentPower;
+        PlayerCurrentPower = playerMaxPower;
         WaveReached = waveReached;
         MaxHealthModifiersCount = maxHealthModifiersCount;
         MaxPowerModifiersCount = maxPowerModifiersCount;

@@ -40,7 +40,7 @@ public class PlayerHealthBehaviour : MonoBehaviour {
     }
 
     public void RestoreHealth() {
-        if (_healthPoints + 1 < _maxHealthPoints) {
+        if (_healthPoints + 1 <= _maxHealthPoints) {
             _healthPoints++;
             Messenger<int>.Broadcast(GameEvents.PlayerHealthIncreasedEvent, 1);
         }

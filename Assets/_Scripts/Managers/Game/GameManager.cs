@@ -10,8 +10,10 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     public GameState _initialGameState;
     [SerializeField]
+    [Range(3, 5)]
     int _maxHealthAllowed;
     [SerializeField]
+    [Range(3, 5)]
     int _maxPowerAllowed;
 
     [Header("Player")]
@@ -23,6 +25,8 @@ public class GameManager : MonoBehaviour {
     TextMeshProUGUI _scoreCounterText;
     [SerializeField]
     TextMeshProUGUI _waveCounterText;
+    [SerializeField]
+    HealthPointsController _healthPointsUIController;
 
     GameState _currentGameState;
 
@@ -95,6 +99,9 @@ public class GameManager : MonoBehaviour {
 
         void InitUI() {
             _scoreCounterText.text = GameTexts.ScoreText + 0.ToString("D12");
+            
+            _healthPointsUIController.SetMaxHealthPoints(_currentGameState.PlayerMaxHealth);
+            IncreaseCurrentHealth(_currentGameState.PlayerMaxHealth);
         }
 
         InitPlayer();
@@ -109,7 +116,8 @@ public class GameManager : MonoBehaviour {
 
     void IncreaseMaxHealthStatus() {
         _currentGameState.PlayerMaxHealth += (_currentGameState.PlayerMaxHealth + 1) <= _maxHealthAllowed ? 1 : 0;
-        // TODO: Update UI showing a new max health pack
+        _healthPointsUIController.SetMaxHealthPoints(_currentGameState.PlayerMaxHealth);
+        IncreaseCurrentHealth(_currentGameState.PlayerMaxHealth);
     }
 
     void IncreaseMaxPowerStatus() {
@@ -123,13 +131,17 @@ public class GameManager : MonoBehaviour {
     }
 
     void IncreaseCurrentHealth(int healthPoints) {
-        _currentGameState.PlayerCurrentHealth += (healthPoints + healthPoints) <= _currentGameState.PlayerMaxHealth ? healthPoints : 0;
-        // TODO: Update UI health points
+        if (_currentGameState.PlayerCurrentHealth + healthPoints >= _currentGameState.PlayerMaxHealth) {
+            _currentGameState.PlayerCurrentHealth = _currentGameState.PlayerMaxHealth;
+        } else {
+            _currentGameState.PlayerCurrentHealth += healthPoints;
+        }
+        _healthPointsUIController.SetHealthPoints(_currentGameState.PlayerCurrentHealth);
     }
 
     void ReduceCurrentHealth() {
-        _currentGameState.PlayerCurrentHealth = (_currentGameState.PlayerCurrentHealth - 1) <= 0 ? 0 : _currentGameState.PlayerCurrentHealth - 1;
-        // TODO: Update UI health points
+        _currentGameState.PlayerCurrentHealth -= (_currentGameState.PlayerCurrentHealth - 1) < 0 ? 0 : 1;
+        _healthPointsUIController.SetHealthPoints(_currentGameState.PlayerCurrentHealth);
     }
 
     void EndCurrentGame() {
