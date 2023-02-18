@@ -113,7 +113,7 @@ public class EnemiesSpawnerBehaviour : MonoBehaviour, ISpawner {
                         TryInstantiateEnemyType2(currentEnemyRowsConfig.EnemyHealth);
                         break;
                     case EnemyTypes.Type3:
-                        InstantiateEnemyType3();
+                        TryInstantiateEnemyType3(currentEnemyRowsConfig.EnemyHealth);
                         break;
                 }
             }
@@ -213,6 +213,7 @@ public class EnemiesSpawnerBehaviour : MonoBehaviour, ISpawner {
             var enemyHealtBehaviour = enemyInstance.transform.GetComponent<EnemyHealthBehaviour>();
             if (enemyType2MovementBehaviour != null && enemyHealtBehaviour != null) {
                 enemyType2MovementBehaviour.Init(_leftBoundaryTransform, _rightBoundaryTransform);
+                
                 enemyHealtBehaviour.Init(healthPoints, new Vector2(spawnRow, InvalidSpawnDescriptorIndex));
             }
 
@@ -220,13 +221,23 @@ public class EnemiesSpawnerBehaviour : MonoBehaviour, ISpawner {
         }
     }
 
-    void InstantiateEnemyType3() {
-        // var spawnXPos = GetRandomBoundedUnoccupiedSpawnXAxisSpace();
+    void TryInstantiateEnemyType3(int healthPoints) {
+        var (spawnColumn, spawnXPos) = GetRandomBoundedUnoccupiedSpawnXAxisSpace();
 
-        // var enemyInstance = Instantiate(_enemyType3Prefab, new Vector2(spawnXPos, _topSpawner.position.y), Quaternion.identity);
-        // var enemyType6MovementBehaviour = enemyInstance.transform.GetComponent<EnemyType3MovementBehaviour>();
-        // if (enemyType6MovementBehaviour != null) {
-        //     enemyType6MovementBehaviour.Init(_enemyType3BottomMovementBoundary);
-        // }
+        // Only spawns an enemy if there is an unoccupied column to do so
+        if (spawnColumn >= 0) {
+            _occupiedColumns[spawnColumn] = true;
+
+            var enemyInstance = Instantiate(_enemyType3Prefab, new Vector2(spawnXPos, _topSpawner.position.y), Quaternion.identity);
+            var enemyType3MovementBehaviour = enemyInstance.transform.GetComponent<EnemyType3MovementBehaviour>();
+            var enemyHealtBehaviour = enemyInstance.transform.GetComponent<EnemyHealthBehaviour>();
+            if (enemyType3MovementBehaviour != null && enemyHealtBehaviour != null) {
+                enemyType3MovementBehaviour.Init(_enemyType3BottomMovementBoundary);
+
+                enemyHealtBehaviour.Init(healthPoints, new Vector2(InvalidSpawnDescriptorIndex, spawnColumn));
+            }
+
+            _currentEnemyRowSpawnedEnemiesCount++;
+        }
     }
 }

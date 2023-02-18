@@ -99,11 +99,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movementSpeed: 1
   _rotationSpeed: 0.05
-  _boundaries:
-    UpBoundary: {fileID: 0}
-    DownBoundary: {fileID: 0}
-    LeftBoundary: {fileID: 0}
-    RightBoundary: {fileID: 0}
   _playerSpriteRenderer: {fileID: 7389582496401694612}
 --- !u!114 &7389582496206754019
 MonoBehaviour:
