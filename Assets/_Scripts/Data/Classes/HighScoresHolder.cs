@@ -37,4 +37,12 @@ public class HighScoresHolder {
     public static HighScoresHolder FromJson(string json) {
         return JsonUtility.FromJson<HighScoresHolder>(json);
     }
+
+    public int Count() {
+        return HighScoreGameStates.Count;
+    }
+
+    public GameState Get(int index) {
+        return HighScoreGameStates[index];
+    }
 }
