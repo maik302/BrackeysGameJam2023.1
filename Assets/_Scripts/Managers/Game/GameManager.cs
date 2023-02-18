@@ -27,6 +27,8 @@ public class GameManager : MonoBehaviour {
     TextMeshProUGUI _waveCounterText;
     [SerializeField]
     HealthPointsController _healthPointsUIController;
+    [SerializeField]
+    PowerPointsController _powerPointsUIController;
 
     GameState _currentGameState;
 
@@ -71,7 +73,6 @@ public class GameManager : MonoBehaviour {
             _initialGameState.PlayerMaxHealth,
             _initialGameState.PlayerCurrentHealth,
             _initialGameState.PlayerMaxPower,
-            _initialGameState.PlayerCurrentPower,
             _initialGameState.WaveReached,
             0,
             0,
@@ -102,16 +103,13 @@ public class GameManager : MonoBehaviour {
             
             _healthPointsUIController.SetMaxHealthPoints(_currentGameState.PlayerMaxHealth);
             IncreaseCurrentHealth(_currentGameState.PlayerMaxHealth);
+
+            _powerPointsUIController.SetMaxPowerPointsAllowed(_maxPowerAllowed);
+            _powerPointsUIController.SetPowerPoints(_currentGameState.PlayerMaxPower);
         }
 
         InitPlayer();
         InitUI();
-        // TODO: Init UI with current game state
-    }
-
-    // Update is called once per frame
-    void Update() {
-        
     }
 
     void IncreaseMaxHealthStatus() {
@@ -122,7 +120,7 @@ public class GameManager : MonoBehaviour {
 
     void IncreaseMaxPowerStatus() {
         _currentGameState.PlayerMaxPower += (_currentGameState.PlayerMaxPower + 1) <= _maxPowerAllowed ? 1 : 0;
-        // TODO: Update UI showing a new max power level
+        _powerPointsUIController.SetPowerPoints(_currentGameState.PlayerMaxPower);
     }
 
     void IncreaseScore(int newScoredPoints) {
@@ -168,7 +166,6 @@ public class GameManager : MonoBehaviour {
             _currentGameState.PlayerMaxHealth,
             _initialGameState.PlayerCurrentHealth,
             _initialGameState.PlayerMaxPower,
-            _initialGameState.PlayerCurrentPower,
             _initialGameState.WaveReached,
             _currentGameState.MaxHealthModifiersCount + 1,
             _currentGameState.MaxPowerModifiersCount,
@@ -184,7 +181,6 @@ public class GameManager : MonoBehaviour {
             _initialGameState.PlayerMaxHealth,
             _initialGameState.PlayerCurrentHealth,
             _currentGameState.PlayerMaxPower,
-            _initialGameState.PlayerCurrentPower,
             _initialGameState.WaveReached,
             _currentGameState.MaxHealthModifiersCount,
             _currentGameState.MaxPowerModifiersCount + 1,
@@ -200,7 +196,6 @@ public class GameManager : MonoBehaviour {
             _initialGameState.PlayerMaxHealth,
             _initialGameState.PlayerCurrentHealth,
             _initialGameState.PlayerMaxPower,
-            _initialGameState.PlayerCurrentPower,
             _initialGameState.WaveReached,
             _currentGameState.MaxHealthModifiersCount,
             _currentGameState.MaxPowerModifiersCount,

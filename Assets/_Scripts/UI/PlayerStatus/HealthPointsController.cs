@@ -29,8 +29,6 @@ public class HealthPointsController : MonoBehaviour {
     }
 
     public void SetHealthPoints(int healthPoints) {
-        Debug.Log($"healthPoints: {healthPoints}");
-        
         _healthPoint0.color = (healthPoints >= 1) ? _activeHealthPointsColor : _inactiveHealthPointsColor;
         _healthPoint1.color = (healthPoints >= 2) ? _activeHealthPointsColor : _inactiveHealthPointsColor;
         _healthPoint2.color = (healthPoints >= 3) ? _activeHealthPointsColor : _inactiveHealthPointsColor;
