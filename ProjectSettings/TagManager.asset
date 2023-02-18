@@ -9,7 +9,8 @@ TagManager:
   - Enemy
   - DownBoundary
   - PickupItem
-  - Projectile
+  - EnemyProjectile
+  - PlayerProjectile
   layers:
   - Default
   - TransparentFX

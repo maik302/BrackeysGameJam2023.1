@@ -112,9 +112,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0645a93a00aecc149b4b7ab2715355b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectilesToShoot: 10
-  _shootFrequency: 3
-  _singleShootFrequency: 0.1
+  _projectilesToShoot: 15
+  _shootFrequency: 6
+  _singleShootFrequency: 0.3
 --- !u!114 &4508362797779610034
 MonoBehaviour:
   m_ObjectHideFlags: 0

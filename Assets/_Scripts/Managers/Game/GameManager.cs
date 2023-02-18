@@ -212,9 +212,16 @@ public class GameManager : MonoBehaviour {
                 }
             }
 
-            var projectileObjectsProjectileBehaviours = GameObject.FindGameObjectsWithTag(GameTags.ProjectileTag)?.Select(projectile => projectile.transform.GetComponent<ProjectileBehaviour>());
-            if (projectileObjectsProjectileBehaviours != null) {
-                foreach (var projectileBehaviour in projectileObjectsProjectileBehaviours) {
+            var enemyProjectileObjectsProjectileBehaviours = GameObject.FindGameObjectsWithTag(GameTags.EnemyProjectileTag)?.Select(projectile => projectile.transform.GetComponent<ProjectileBehaviour>());
+            if (enemyProjectileObjectsProjectileBehaviours != null) {
+                foreach (var projectileBehaviour in enemyProjectileObjectsProjectileBehaviours) {
+                    projectileBehaviour.ReleaseObject();
+                }
+            }
+
+            var playerProjectileObjectsProjectileBehaviours = GameObject.FindGameObjectsWithTag(GameTags.PlayerProjectileTag)?.Select(projectile => projectile.transform.GetComponent<ProjectileBehaviour>());
+            if (playerProjectileObjectsProjectileBehaviours != null) {
+                foreach (var projectileBehaviour in playerProjectileObjectsProjectileBehaviours) {
                     projectileBehaviour.ReleaseObject();
                 }
             }

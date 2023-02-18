@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4564300935875608480}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.7, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -214,11 +214,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 7
-  _boundaries:
-    UpBoundary: {fileID: 0}
-    DownBoundary: {fileID: 0}
-    LeftBoundary: {fileID: 0}
-    RightBoundary: {fileID: 0}
+  _topBoundary: {fileID: 0}
+  _bottomBoundary: {fileID: 0}
+  _leftBoundary: {fileID: 0}
+  _rightBoundary: {fileID: 0}
   _playerSpriteRenderer: {fileID: 4564300936258171937}
 --- !u!114 &4564300936386169318
 MonoBehaviour:
