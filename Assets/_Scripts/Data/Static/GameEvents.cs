@@ -12,4 +12,7 @@ public static class GameEvents {
     public const string PlayerDiedEvent = "PlayerDiedEvent";
     public const string EnemySpawningPositionFreedEvent = "EnemySpawningPositionFreedEvent";
     public const string NewWaveStartedEvent = "NewWaveStartedEvent";
+    public const string RestartGameWithPreviousMaxHealthEvent = "RestartGameWithPreviousMaxHealthEvent";
+    public const string RestartGameWithPreviousMaxPowerEvent = "RestartGameWithPreviousMaxPower";
+    public const string RestartGameWithPreviousScoreEvent = "RestartGameWithPreviousScore";
 }

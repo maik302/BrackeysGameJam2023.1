@@ -40,13 +40,10 @@ public class WavesManager : MonoBehaviour {
         }
     }
 
-    void Awake() {
+    public void StartGame() {
         _waveCounter = 0;
         _isHardModeActive = false;
-    }
-
-    // Start is called before the first frame update
-    void Start() {
+        
         StartWave();
     }
 

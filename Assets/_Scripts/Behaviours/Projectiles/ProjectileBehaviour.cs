@@ -38,4 +38,8 @@ public class ProjectileBehaviour : MonoBehaviour {
     public void Init(Action<GameObject, Collider2D> collisionAction) {
         _collisionAction = collisionAction;
     }
+
+    public void ReleaseObject() {
+        _collisionAction(gameObject, null);
+    }
 }

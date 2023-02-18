@@ -51,7 +51,12 @@ public class EnemyProjectilesPoolBehaviour : MonoBehaviour {
             }
         }
 
-        HandleCollision(collider);
+        // Only when a collider is met, handle their collision. Otherwise, release this object to its pool
+        if (collider != null) {
+            HandleCollision(collider);
+        } else {
+            _projectilesPool.Release(projectile);
+        }
     }
 
     public GameObject GetProjectileInstance(Transform shooterTransform) {

@@ -23,4 +23,16 @@ public class GameOverScreenController : MonoBehaviour {
         _powerModifiersCountText.text = finalGameState.MaxPowerModifiersCount.ToString("D2");
         _scoreModifiersCountText.text = finalGameState.ScoreModifiersCount.ToString("D2");
     }
+
+    public void RestartGameWithPreviousMaxHealth() {
+        Messenger.Broadcast(GameEvents.RestartGameWithPreviousMaxHealthEvent);
+    }
+
+    public void RestartGameWithPreviousMaxPower() {
+        Messenger.Broadcast(GameEvents.RestartGameWithPreviousMaxPowerEvent);
+    }
+
+    public void RestartGameWithPreviousScore() {
+        Messenger.Broadcast(GameEvents.RestartGameWithPreviousScoreEvent);
+    }
 }

@@ -6,7 +6,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour {
 
-    [Header("Game State")]
+    [Header("Game Configurations")]
     [SerializeField]
     public GameState _initialGameState;
     [SerializeField]
@@ -15,10 +15,20 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     [Range(3, 5)]
     int _maxPowerAllowed;
+    [SerializeField]
+    WavesManager _wavesManager;
 
     [Header("Player")]
     [SerializeField]
-    GameObject _player;
+    GameObject _playerPrefab;
+    [SerializeField]
+    Transform _topBoundary;
+    [SerializeField]
+    Transform _bottomBoundary;
+    [SerializeField]
+    Transform _leftBoundary;
+    [SerializeField]
+    Transform _rightBoundary;
 
     [Header("HUD")]
     [Header("In Game UI")]
@@ -51,6 +61,11 @@ public class GameManager : MonoBehaviour {
 
         // Waves related events
         Messenger<int>.AddListener(GameEvents.NewWaveStartedEvent, StartNewWave);
+
+        // Restart game related events
+        Messenger.AddListener(GameEvents.RestartGameWithPreviousMaxHealthEvent, RestartGameWithPreviousMaxHealth);
+        Messenger.AddListener(GameEvents.RestartGameWithPreviousMaxPowerEvent, RestartGameWithPreviousMaxPower);
+        Messenger.AddListener(GameEvents.RestartGameWithPreviousScoreEvent, RestartGameWithPreviousScore);
     }
 
     void OnDisable() {
@@ -67,7 +82,12 @@ public class GameManager : MonoBehaviour {
         Messenger.RemoveListener(GameEvents.PlayerDiedEvent, EndCurrentGame);
 
         // Waves related events
-        Messenger<int>.AddListener(GameEvents.NewWaveStartedEvent, StartNewWave);
+        Messenger<int>.RemoveListener(GameEvents.NewWaveStartedEvent, StartNewWave);
+
+        // Restart game related events
+        Messenger.RemoveListener(GameEvents.RestartGameWithPreviousMaxHealthEvent, RestartGameWithPreviousMaxHealth);
+        Messenger.RemoveListener(GameEvents.RestartGameWithPreviousMaxPowerEvent, RestartGameWithPreviousMaxPower);
+        Messenger.RemoveListener(GameEvents.RestartGameWithPreviousScoreEvent, RestartGameWithPreviousScore);
     }
 
     void Awake() {
@@ -91,19 +111,26 @@ public class GameManager : MonoBehaviour {
 
     void InitGame() {
         void InitPlayer() {
-            var playerHealthBehaviour = _player.transform.GetComponent<PlayerHealthBehaviour>();
+            var playerObject = Instantiate(_playerPrefab, new Vector3(0, 0), Quaternion.identity);
+
+            var playerMovementBehaviour = playerObject.transform.GetComponent<PlayerMovementBehaviour>();
+            if (playerMovementBehaviour != null) {
+                playerMovementBehaviour.InitMovementBoundaries(_topBoundary, _bottomBoundary, _leftBoundary, _rightBoundary);
+            }
+
+            var playerHealthBehaviour = playerObject.transform.GetComponent<PlayerHealthBehaviour>();
             if (playerHealthBehaviour != null) {
                 playerHealthBehaviour.InitHealthPoints(_currentGameState.PlayerMaxHealth, _maxHealthAllowed);
             }
 
-            var playerShootingBehaviour = _player.transform.GetComponent<PlayerShootingBehaviour>();
+            var playerShootingBehaviour = playerObject.transform.GetComponent<PlayerShootingBehaviour>();
             if (playerShootingBehaviour != null) {
                 playerShootingBehaviour.InitPowerPoints(_currentGameState.PlayerMaxPower, _maxPowerAllowed);
             }
         }
 
         void InitUI() {
-            _scoreCounterText.text = GameTexts.ScoreText + 0.ToString("D12");
+            _scoreCounterText.text = GameTexts.ScoreText + _currentGameState.PlayerScore.ToString("D12");
             
             _healthPointsUIController.SetMaxHealthPoints(_currentGameState.PlayerMaxHealth);
             IncreaseCurrentHealth(_currentGameState.PlayerMaxHealth);
@@ -114,6 +141,7 @@ public class GameManager : MonoBehaviour {
 
         InitPlayer();
         InitUI();
+        _wavesManager.StartGame();
     }
 
     void IncreaseMaxHealthStatus() {
@@ -184,10 +212,10 @@ public class GameManager : MonoBehaviour {
                 }
             }
 
-            var projectileObjects = GameObject.FindGameObjectsWithTag(GameTags.ProjectileTag);
-            if (projectileObjects != null) {
-                foreach (var projectile in projectileObjects) {
-                    Destroy(projectile);
+            var projectileObjectsProjectileBehaviours = GameObject.FindGameObjectsWithTag(GameTags.ProjectileTag)?.Select(projectile => projectile.transform.GetComponent<ProjectileBehaviour>());
+            if (projectileObjectsProjectileBehaviours != null) {
+                foreach (var projectileBehaviour in projectileObjectsProjectileBehaviours) {
+                    projectileBehaviour.ReleaseObject();
                 }
             }
         }
@@ -211,8 +239,7 @@ public class GameManager : MonoBehaviour {
             _currentGameState.MaxPowerModifiersCount,
             _currentGameState.ScoreModifiersCount
         );
-        // TODO: Destroy all enemies
-        // TODO: Restart WaveManager and Spawners
+        ResetGame();
     }
 
     void RestartGameWithPreviousMaxPower() {
@@ -226,8 +253,7 @@ public class GameManager : MonoBehaviour {
             _currentGameState.MaxPowerModifiersCount + 1,
             _currentGameState.ScoreModifiersCount
         );
-        // TODO: Destroy all enemies
-        // TODO: Restart WaveManager and Spawners
+        ResetGame();
     }
 
     void RestartGameWithPreviousScore() {
@@ -241,12 +267,18 @@ public class GameManager : MonoBehaviour {
             _currentGameState.MaxPowerModifiersCount,
             _currentGameState.ScoreModifiersCount + 1
         );
-        // TODO: Destroy all enemies
-        // TODO: Restart WaveManager and Spawners
+        ResetGame();
     }
 
     void StartNewWave(int waveNumber) {
         _currentGameState.WaveReached = waveNumber;
         _waveCounterText.text = GameTexts.WaveText + (waveNumber + 1).ToString("D2");
+    }
+
+    void ResetGame() {
+        _gameOverScreen.SetActive(false);
+        Time.timeScale = 1f;
+        
+        InitGame();
     }
 }
