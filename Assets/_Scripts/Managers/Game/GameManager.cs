@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using TMPro;
 
 public class GameManager : MonoBehaviour {
 
@@ -17,6 +18,12 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     GameObject _player;
 
+    [Header("HUD")]
+    [SerializeField]
+    TextMeshProUGUI _scoreCounterText;
+    [SerializeField]
+    TextMeshProUGUI _waveCounterText;
+
     GameState _currentGameState;
 
     void OnEnable() {
@@ -31,6 +38,9 @@ public class GameManager : MonoBehaviour {
         Messenger<int>.AddListener(GameEvents.PlayerHealthIncreasedEvent, IncreaseCurrentHealth);
         Messenger.AddListener(GameEvents.PlayerTookDamageEvent, ReduceCurrentHealth);
         Messenger.AddListener(GameEvents.PlayerDiedEvent, EndCurrentGame);
+
+        // Waves related events
+        Messenger<int>.AddListener(GameEvents.NewWaveStartedEvent, StartNewWave);
     }
 
     void OnDisable() {
@@ -45,6 +55,9 @@ public class GameManager : MonoBehaviour {
         Messenger<int>.RemoveListener(GameEvents.PlayerHealthIncreasedEvent, IncreaseCurrentHealth);
         Messenger.RemoveListener(GameEvents.PlayerTookDamageEvent, ReduceCurrentHealth);
         Messenger.RemoveListener(GameEvents.PlayerDiedEvent, EndCurrentGame);
+
+        // Waves related events
+        Messenger<int>.AddListener(GameEvents.NewWaveStartedEvent, StartNewWave);
     }
 
     void Awake() {
@@ -80,7 +93,12 @@ public class GameManager : MonoBehaviour {
             }
         }
 
+        void InitUI() {
+            _scoreCounterText.text = GameTexts.ScoreText + 0.ToString("D12");
+        }
+
         InitPlayer();
+        InitUI();
         // TODO: Init UI with current game state
     }
 
@@ -101,7 +119,7 @@ public class GameManager : MonoBehaviour {
 
     void IncreaseScore(int newScoredPoints) {
         _currentGameState.PlayerScore += newScoredPoints;
-        // TODO: Update UI showing the new score
+        _scoreCounterText.text = GameTexts.ScoreText + _currentGameState.PlayerScore.ToString("D12");
     }
 
     void IncreaseCurrentHealth(int healthPoints) {
@@ -178,5 +196,9 @@ public class GameManager : MonoBehaviour {
         );
         // TODO: Destroy all enemies
         // TODO: Restart WaveManager and Spawners
+    }
+
+    void StartNewWave(int waveNumber) {
+        _waveCounterText.text = GameTexts.WaveText + (waveNumber + 1).ToString("D2");
     }
 }

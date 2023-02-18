@@ -51,10 +51,9 @@ public class WavesManager : MonoBehaviour {
     }
 
     void StartWave() {
-        _isHardModeActive = _waveCounter >= _waveToStartHardMode;
+        Messenger<int>.Broadcast(GameEvents.NewWaveStartedEvent, _waveCounter);
 
-        // A 1 is added to display non-programmer counting information in the game HUD
-        Messenger<int>.Broadcast(GameEvents.NewWaveStartedEvent, _waveCounter + 1);
+        _isHardModeActive = _waveCounter >= _waveToStartHardMode;
 
         var currentPickupItemssWaveConfigurationIndex = _waveCounter % _pickupItemsWavesConfiguration.Count;
         StartPickupItemsSpawner(currentPickupItemssWaveConfigurationIndex);
