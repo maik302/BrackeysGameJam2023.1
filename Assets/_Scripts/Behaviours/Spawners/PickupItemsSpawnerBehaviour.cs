@@ -52,9 +52,13 @@ public class PickupItemsSpawnerBehaviour : MonoBehaviour, ISpawner {
 
                 return acc;
             });
-            var itemToSpawn = UnityEngine.Random.Range(0, itemsAvailableToSpawn.Count - 1);  
 
-            return itemsAvailableToSpawn[itemToSpawn];
+            if (itemsAvailableToSpawn.Count > 0) {
+                var itemToSpawn = UnityEngine.Random.Range(0, itemsAvailableToSpawn.Count);  
+                return itemsAvailableToSpawn[itemToSpawn];
+            } else {
+                return -1;
+            }
         }
 
         while (_spawnedItems < _currentConfiguration.MaxItemsToSpawn) {
@@ -70,6 +74,8 @@ public class PickupItemsSpawnerBehaviour : MonoBehaviour, ISpawner {
                     break;
                 case 2:
                     InstantiateHealthItem();
+                    break;
+                default:
                     break;
             }
         }

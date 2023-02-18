@@ -26,6 +26,16 @@ public class PickupItemsSpawnConfiguration {
     [Range(0f, 1f)]
     public float ProbabilityForHealth;
 
+    public PickupItemsSpawnConfiguration(int maxItemsToSpawn, float minSpawnFrequency, float maxSpawnFrequency, float probabilityForMaxHealth, float probabilityForPowerUp, float probabilityForHealth)
+    {
+        MaxItemsToSpawn = maxItemsToSpawn;
+        MinSpawnFrequency = minSpawnFrequency;
+        MaxSpawnFrequency = maxSpawnFrequency;
+        ProbabilityForMaxHealth = probabilityForMaxHealth;
+        ProbabilityForPowerUp = probabilityForPowerUp;
+        ProbabilityForHealth = probabilityForHealth;
+    }
+
     public List<float> GetProbabilitiesAsList() {
         var probabilitiesList = new List<float>();
         probabilitiesList.Add(ProbabilityForMaxHealth);
@@ -33,6 +43,17 @@ public class PickupItemsSpawnConfiguration {
         probabilitiesList.Add(ProbabilityForHealth);
 
         return probabilitiesList;
+    }
+
+    public PickupItemsSpawnConfiguration GetCopy() {
+        return new PickupItemsSpawnConfiguration(
+            this.MaxItemsToSpawn,
+            this.MinSpawnFrequency,
+            this.MaxSpawnFrequency,
+            this.ProbabilityForMaxHealth,
+            this.ProbabilityForPowerUp,
+            this.ProbabilityForHealth
+        );
     }
 
 }
