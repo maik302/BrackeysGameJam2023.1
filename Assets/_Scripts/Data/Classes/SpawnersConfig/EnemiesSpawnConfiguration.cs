@@ -8,11 +8,16 @@ public class EnemiesSpawnConfiguration {
 
     [Header("Spawn configuration")]
     [SerializeField]
+    public int EnemiesInGameThreshold;
+    [SerializeField]
     [Tooltip("Min frequency in seconds that an enemy can be spawned")]
     public float MinSpawnFrequency;
     [SerializeField]
     [Tooltip("Max frequency in seconds that an enemy can be spawned")]
     public float MaxSpawnFrequency;
+    [SerializeField]
+    [Tooltip("Min frequency in seconds in which each enemies row will spawned")]
+    public float MinEnemyRowsSpawnFrequency;
     [SerializeField]
     [Tooltip("Max frequency in seconds in which each enemies row will spawned")]
     public float MaxEnemyRowsSpawnFrequency;

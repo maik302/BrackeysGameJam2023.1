@@ -49,6 +49,7 @@ public class EnemiesSpawnerBehaviour : MonoBehaviour, ISpawner {
     bool[] _occupiedColumns;
     bool[] _occupiedRows;
     int _currentEnemyRowSpawnedEnemiesCount;
+    int _enemiesInGameCount;
 
     void OnEnable() {
         Messenger<Vector2>.AddListener(GameEvents.EnemySpawningPositionFreedEvent, FreeEnemySpawnPosition);
@@ -70,6 +71,8 @@ public class EnemiesSpawnerBehaviour : MonoBehaviour, ISpawner {
         else if (releasedColumnIndex != InvalidSpawnDescriptorIndex) {
             _occupiedColumns[releasedColumnIndex] = false;
         }
+
+        _enemiesInGameCount--;
     }
 
     public void Init(EnemiesSpawnConfiguration configuration) {
@@ -98,6 +101,9 @@ public class EnemiesSpawnerBehaviour : MonoBehaviour, ISpawner {
         var enemyRowsConfigurations = _currentConfiguration.EnemyRowsConfigurations;
         while (enemyRowsConfigurations.Count > 0) {
             var currentEnemyRowsConfig = enemyRowsConfigurations[0];
+
+            var secondsForNextEnemiesRowSpawn = GetSecondsForNextEnemiesRowSpawn(_currentConfiguration);
+            yield return new WaitForSeconds(secondsForNextEnemiesRowSpawn);
             
             // Spawn enemies
             _currentEnemyRowSpawnedEnemiesCount = 0;
@@ -119,6 +125,10 @@ public class EnemiesSpawnerBehaviour : MonoBehaviour, ISpawner {
             }
             enemyRowsConfigurations.RemoveAt(0);
         }
+    }
+
+    float GetSecondsForNextEnemiesRowSpawn(EnemiesSpawnConfiguration configuration) {
+        return (_enemiesInGameCount >= configuration.EnemiesInGameThreshold) ? configuration.MaxEnemyRowsSpawnFrequency : configuration.MinEnemyRowsSpawnFrequency;
     }
 
     float GetSecondsForNextEnemySpawn(EnemiesSpawnConfiguration configuration) {
@@ -143,6 +153,7 @@ public class EnemiesSpawnerBehaviour : MonoBehaviour, ISpawner {
             }
 
             _currentEnemyRowSpawnedEnemiesCount++;
+            _enemiesInGameCount++;
         }
     }
 
@@ -218,6 +229,7 @@ public class EnemiesSpawnerBehaviour : MonoBehaviour, ISpawner {
             }
 
             _currentEnemyRowSpawnedEnemiesCount++;
+            _enemiesInGameCount++;
         }
     }
 
@@ -238,6 +250,7 @@ public class EnemiesSpawnerBehaviour : MonoBehaviour, ISpawner {
             }
 
             _currentEnemyRowSpawnedEnemiesCount++;
+            _enemiesInGameCount++;
         }
     }
 }
