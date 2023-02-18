@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour {
     GameObject _player;
 
     [Header("HUD")]
+    [Header("In Game UI")]
     [SerializeField]
     TextMeshProUGUI _scoreCounterText;
     [SerializeField]
