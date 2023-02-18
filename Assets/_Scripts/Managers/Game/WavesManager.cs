@@ -10,9 +10,15 @@ public class WavesManager : MonoBehaviour {
     [SerializeField]
     List<PickupItemsSpawnConfiguration> _pickupItemsWavesConfiguration;
 
+    [Header("Enemy Waves configuration")]
+    [SerializeField]
+    EnemiesSpawnerBehaviour _enemiesSpawner;
+    [SerializeField]
+    List<EnemiesSpawnConfiguration> _enemyWavesConfiguration;
+
     // Start is called before the first frame update
     void Start() {
-
+        StartEnemiesSpawner();
     }
 
     // Update is called once per frame
@@ -25,5 +31,12 @@ public class WavesManager : MonoBehaviour {
         
         _pickupItemsSpawner.Init(_pickupItemsWavesConfiguration[0]);
         _pickupItemsSpawner.StartSpawning();
+    }
+
+    void StartEnemiesSpawner() {
+        // TEST PURPOSES ONLY
+        
+        _enemiesSpawner.Init(_enemyWavesConfiguration[0]);
+        _enemiesSpawner.StartSpawning();
     }
 }

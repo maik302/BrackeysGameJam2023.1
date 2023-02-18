@@ -490,6 +490,18 @@ MonoBehaviour:
     ProbabilityForMaxHealth: 0.5
     ProbabilityForPowerUp: 0.5
     ProbabilityForHealth: 0.9
+  _enemiesSpawner: {fileID: 2098825194}
+  _enemyWavesConfiguration:
+  - MinSpawnFrequency: 1
+    MaxSpawnFrequency: 1
+    MaxEnemyRowsSpawnFrequency: 1
+    EnemyRowsConfigurations:
+    - EnemyType: 0
+      EnemyHealth: 3
+      MaxEnemiesToSpawn: 10
+    - EnemyType: 1
+      EnemyHealth: 3
+      MaxEnemiesToSpawn: 0
 --- !u!4 &591402445
 Transform:
   m_ObjectHideFlags: 0

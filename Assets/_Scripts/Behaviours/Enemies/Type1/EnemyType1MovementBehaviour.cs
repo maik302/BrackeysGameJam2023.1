@@ -9,13 +9,13 @@ public class EnemyType1MovementBehaviour : MonoBehaviour {
     [SerializeField]
     SpriteRenderer _playerSpriteRenderer;
 
-    Transform _bottomBoundary;
+    float _bottomBoundaryYPos;
     Vector2 _initialPosition;
 
     float _spriteMiddlePoint;
 
-    public void Init(Transform bottomBoundary) {
-        _bottomBoundary = bottomBoundary;
+    public void Init(float bottomBoundaryYPos) {
+        _bottomBoundaryYPos = bottomBoundaryYPos;
         _initialPosition = new Vector2(transform.position.x, transform.position.y);
     }
 
@@ -33,7 +33,7 @@ public class EnemyType1MovementBehaviour : MonoBehaviour {
         var movementDirection = direction * _speed * Time.deltaTime;
         var boundedMovementDirection = new Vector2(
             transform.position.x,
-            Mathf.Clamp(transform.position.y + movementDirection.y, _bottomBoundary.position.y + _spriteMiddlePoint, _initialPosition.y)
+            Mathf.Clamp(transform.position.y + movementDirection.y, _bottomBoundaryYPos + _spriteMiddlePoint, _initialPosition.y)
         );
 
         transform.position = boundedMovementDirection;

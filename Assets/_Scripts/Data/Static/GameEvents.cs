@@ -10,4 +10,5 @@ public static class GameEvents {
     public const string PlayerHealthIncreasedEvent = "PlayerHealthIncreasedEvent";
     public const string PlayerTookDamageEvent = "PlayerTookDamageEvent";
     public const string PlayerDiedEvent = "PlayerDiedEvent";
+    public const string EnemySpawningPositionFreedEvent = "EnemySpawningPositionFreedEvent";
 }

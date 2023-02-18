@@ -57,9 +57,8 @@ public class PickupItemsSpawnerBehaviour : MonoBehaviour, ISpawner {
             return itemsAvailableToSpawn[itemToSpawn];
         }
 
-        var secondsForNextSpawn = UnityEngine.Random.Range(_currentConfiguration.MinSpawnFrequency, _currentConfiguration.MaxSpawnFrequency);
-
         while (_spawnedItems < _currentConfiguration.MaxItemsToSpawn) {
+            var secondsForNextSpawn = UnityEngine.Random.Range(_currentConfiguration.MinSpawnFrequency, _currentConfiguration.MaxSpawnFrequency);
             yield return new WaitForSeconds(secondsForNextSpawn);
 
             switch (GetItemToSpawnId()) {

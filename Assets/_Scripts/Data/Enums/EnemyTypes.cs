@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ISpawner {
-    IEnumerator Spawn();
-    void StartSpawning();
+public enum EnemyTypes {
+    Type1,
+    Type2,
+    Type3,
 }
