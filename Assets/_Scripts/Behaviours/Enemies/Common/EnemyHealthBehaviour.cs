@@ -23,6 +23,7 @@ public class EnemyHealthBehaviour : MonoBehaviour {
     }
 
     public void TakeDamage(int damagePoints) {
+        AudioManager.Instance.Play(AudioNames.EnemyDamageSFX);
         _healthPoints -= damagePoints;
         if (_healthPoints <= 0) {
             Die();
@@ -30,6 +31,7 @@ public class EnemyHealthBehaviour : MonoBehaviour {
     }
 
     void Die() {
+        AudioManager.Instance.Play(AudioNames.EnemyDeathSFX);
         Messenger<int>.Broadcast(GameEvents.EnemyDestroyedEvent, _baseHealthPoints * _scoreMultiplier);
         Messenger<Vector2>.Broadcast(GameEvents.EnemySpawningPositionFreedEvent, _spawnedPositionDescriptor);
         Destroy(gameObject);

@@ -97,6 +97,7 @@ public class PlayerShootingBehaviour : MonoBehaviour {
     }
 
     void OnFire() {
+        AudioManager.Instance.Play(AudioNames.PlayerProjectileSFX);
         _projectilesPool.Get();
     }
 

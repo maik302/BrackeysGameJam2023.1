@@ -15,6 +15,7 @@ public class PowerUpPickupBehaviour : PickupBehaviour {
     }
 
     protected override void OnPickedUpByPlayer() {
+        AudioManager.Instance.Play(AudioNames.PickPowerUpSFX);
         Messenger.Broadcast(GameEvents.PowerUpPickupGrabbedEvent);
         Destroy(gameObject);
     }

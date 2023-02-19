@@ -27,6 +27,7 @@ public class PlayerHealthBehaviour : MonoBehaviour {
     }
 
     public void TakeDamage() {
+        AudioManager.Instance.Play(AudioNames.PlayerDamageSFX);
         _healthPoints = ((_healthPoints - 1) <= 0) ? 0 : _healthPoints - 1;
         Messenger.Broadcast(GameEvents.PlayerTookDamageEvent);
         if (_healthPoints == 0) {

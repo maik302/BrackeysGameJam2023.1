@@ -35,7 +35,7 @@ public class AudioManager : MonoBehaviour {
     public void Play(string name) {
         Sound sound = Array.Find(Sounds, s => s.Name == name);
         if (sound != null) {
-            // Stop any background muisic that is playing is the sound being played is another BGM
+            // Stop any background music that is playing if the sound being played is another BGM
             if (sound.IsBGM) {
                 Sound playingBGM = Array.Find(Sounds, s => s.IsBGM && s.IsPlaying);
                 if (playingBGM != null) {
@@ -45,6 +45,24 @@ public class AudioManager : MonoBehaviour {
 
             sound.AudioSource.Play();
             sound.IsPlaying = true;
+        }
+    }
+
+    public void PlayBgmWithoutInterruption(string name) {
+        Sound sound = Array.Find(Sounds, s => s.Name == name);
+        if (sound != null) {
+            // Stop any background music that is playing if the sound being played is another BGM
+            if (sound.IsBGM) {
+                Sound playingBGM = Array.Find(Sounds, s => s.IsBGM && s.IsPlaying);
+                if (playingBGM == null) {
+                    sound.AudioSource.Play();
+                    sound.IsPlaying = true;
+                } else if (playingBGM.Name != name) {
+                    Stop(playingBGM.Name);
+                    sound.AudioSource.Play();
+                    sound.IsPlaying = true;
+                }
+            }
         }
     }
 

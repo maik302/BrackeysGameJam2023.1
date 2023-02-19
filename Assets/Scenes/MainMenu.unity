@@ -123,51 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &222644251
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 222644252}
-  - component: {fileID: 222644253}
-  m_Layer: 0
-  m_Name: AudioManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &222644252
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 222644251}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &222644253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 222644251}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ce99c7478acd5a40858491335c9a9a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Sounds: []
 --- !u!1 &234749534
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,7 +926,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1270099116
 Transform:
   m_ObjectHideFlags: 0
@@ -986,6 +941,147 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1367646846
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1367646848}
+  - component: {fileID: 1367646847}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1367646847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367646846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ce99c7478acd5a40858491335c9a9a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Sounds:
+  - Name: MenuMusic
+    AudioClip: {fileID: 8300000, guid: 76b53e46ff6ef6745931798de86f2bd4, type: 3}
+    Volume: 0.2
+    Pitch: 1
+    Loop: 1
+    AudioSource: {fileID: 0}
+    IsPlaying: 0
+    IsBGM: 1
+  - Name: BGM0
+    AudioClip: {fileID: 8300000, guid: 63e2d732badada7439c476ac14746617, type: 3}
+    Volume: 0.2
+    Pitch: 1
+    Loop: 1
+    AudioSource: {fileID: 0}
+    IsPlaying: 0
+    IsBGM: 1
+  - Name: BGM1
+    AudioClip: {fileID: 8300000, guid: b470432d7ce59ed4db71697500c86e9e, type: 3}
+    Volume: 0.2
+    Pitch: 1
+    Loop: 1
+    AudioSource: {fileID: 0}
+    IsPlaying: 0
+    IsBGM: 1
+  - Name: PickMaxHealthSFX
+    AudioClip: {fileID: 8300000, guid: eda380b9a77250742951b1ba467824f3, type: 3}
+    Volume: 0.6
+    Pitch: 1
+    Loop: 0
+    AudioSource: {fileID: 0}
+    IsPlaying: 0
+    IsBGM: 0
+  - Name: PickHealthSFX
+    AudioClip: {fileID: 8300000, guid: 4453beea1bcc19c418616b9353449067, type: 3}
+    Volume: 0.6
+    Pitch: 1
+    Loop: 0
+    AudioSource: {fileID: 0}
+    IsPlaying: 0
+    IsBGM: 0
+  - Name: PickPowerUpSFX
+    AudioClip: {fileID: 8300000, guid: 6de4b25b9c7a6724788e8c765230a9e2, type: 3}
+    Volume: 0.5
+    Pitch: 1
+    Loop: 0
+    AudioSource: {fileID: 0}
+    IsPlaying: 0
+    IsBGM: 0
+  - Name: PlayerProjectileSFX
+    AudioClip: {fileID: 8300000, guid: 4ccadcbf9ebf6de43aa0b2b6ecc5a88a, type: 3}
+    Volume: 0.5
+    Pitch: 1
+    Loop: 0
+    AudioSource: {fileID: 0}
+    IsPlaying: 0
+    IsBGM: 0
+  - Name: EnemyProjectileSFX
+    AudioClip: {fileID: 8300000, guid: 2cdfa40606b1f7e4f96c5f967e3b6977, type: 3}
+    Volume: 0.5
+    Pitch: 1
+    Loop: 0
+    AudioSource: {fileID: 0}
+    IsPlaying: 0
+    IsBGM: 0
+  - Name: EnemyDamageSFX
+    AudioClip: {fileID: 8300000, guid: 59170a8398294734faffedb5ea980e59, type: 3}
+    Volume: 0.5
+    Pitch: 1
+    Loop: 0
+    AudioSource: {fileID: 0}
+    IsPlaying: 0
+    IsBGM: 0
+  - Name: EnemyDeathSFX
+    AudioClip: {fileID: 8300000, guid: 41e7605ac34209141b8d82c5c2ba4f84, type: 3}
+    Volume: 0.5
+    Pitch: 1
+    Loop: 0
+    AudioSource: {fileID: 0}
+    IsPlaying: 0
+    IsBGM: 0
+  - Name: PlayerDamageSFX
+    AudioClip: {fileID: 8300000, guid: 491a45f99c8a458449f4291a7c2d0168, type: 3}
+    Volume: 0.5
+    Pitch: 1
+    Loop: 0
+    AudioSource: {fileID: 0}
+    IsPlaying: 0
+    IsBGM: 0
+  - Name: GameOverSFX
+    AudioClip: {fileID: 8300000, guid: b3fa05a131c64784a867ddad02c097e4, type: 3}
+    Volume: 0.5
+    Pitch: 1
+    Loop: 0
+    AudioSource: {fileID: 0}
+    IsPlaying: 0
+    IsBGM: 0
+--- !u!4 &1367646848
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367646846}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1887167191
 GameObject:
@@ -1105,7 +1201,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1959937422
 Transform:
   m_ObjectHideFlags: 0

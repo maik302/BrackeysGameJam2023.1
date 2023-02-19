@@ -15,6 +15,7 @@ public class MaxHealthPickupBehaviour : PickupBehaviour {
     }
 
     protected override void OnPickedUpByPlayer() {
+        AudioManager.Instance.Play(AudioNames.PickMaxHealthSFX);
         Messenger.Broadcast(GameEvents.MaxHealthPickupGrabbedEvent);
         Destroy(gameObject);
     }
