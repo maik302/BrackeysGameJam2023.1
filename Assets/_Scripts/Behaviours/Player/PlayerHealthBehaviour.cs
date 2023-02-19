@@ -32,6 +32,23 @@ public class PlayerHealthBehaviour : MonoBehaviour {
         Messenger.Broadcast(GameEvents.PlayerTookDamageEvent);
         if (_healthPoints == 0) {
             Die();
+        } else {
+            StartCoroutine(ShowFlickerEffect(.1f, 3));
+        }
+    }
+
+    IEnumerator ShowFlickerEffect(float timeInSeconds, int repeatTimes) {
+        var spriteRenderer = gameObject.transform.GetComponentInChildren<SpriteRenderer>();
+        if (spriteRenderer != null) {
+            var repetition = 0;
+            while (repetition < repeatTimes) {
+                spriteRenderer.enabled = !spriteRenderer.enabled;
+                yield return new WaitForSeconds(timeInSeconds);
+                
+                repetition++;
+            }
+            
+            spriteRenderer.enabled = true;
         }
     }
 

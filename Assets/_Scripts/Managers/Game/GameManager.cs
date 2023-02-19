@@ -284,6 +284,19 @@ public class GameManager : MonoBehaviour {
     void StartNewWave(int waveNumber) {
         _currentGameState.WaveReached = waveNumber;
         _waveCounterText.text = GameTexts.WaveText + (waveNumber + 1).ToString("D2");
+        StartCoroutine(ShowFlickerEffect(_waveCounterText, .2f, 7));
+    }
+
+    IEnumerator ShowFlickerEffect(TextMeshProUGUI textMeshPro, float timeInSeconds, int repeatTimes) {
+        var repetition = 0;
+        while (repetition < repeatTimes) {
+            textMeshPro.enabled = !textMeshPro.enabled;
+            yield return new WaitForSeconds(timeInSeconds);
+            
+            repetition++;
+        }
+            
+        textMeshPro.enabled = true;
     }
 
     void ResetGame() {

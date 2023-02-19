@@ -2342,13 +2342,13 @@ MonoBehaviour:
     MaxEnemyRowsSpawnFrequency: 5
     EnemyRowsConfigurations:
     - EnemyType: 0
-      EnemyHealth: 1
+      EnemyHealth: 3
       MaxEnemiesToSpawn: 1
     - EnemyType: 0
-      EnemyHealth: 1
+      EnemyHealth: 3
       MaxEnemiesToSpawn: 1
     - EnemyType: 0
-      EnemyHealth: 1
+      EnemyHealth: 3
       MaxEnemiesToSpawn: 1
 --- !u!4 &591402445
 Transform:
