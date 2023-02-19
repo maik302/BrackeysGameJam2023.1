@@ -11,8 +11,6 @@ public class GameState : IComparable {
     [HideInInspector]
     public int PlayerCurrentHealth;
     public int PlayerMaxPower;
-    [HideInInspector]
-    public int PlayerCurrentPower;
     public int WaveReached;
 
     [HideInInspector]
@@ -27,16 +25,14 @@ public class GameState : IComparable {
         int playerMaxHealth,
         int playerCurrentHealth,
         int playerMaxPower,
-        int playerCurrentPower,
         int waveReached,
         int maxHealthModifiersCount,
         int maxPowerModifiersCount,
         int scoreModifiersCount) {
         PlayerScore = playerScore;
         PlayerMaxHealth = playerMaxHealth;
-        PlayerCurrentHealth = playerCurrentHealth;
+        PlayerCurrentHealth = playerMaxHealth;
         PlayerMaxPower = playerMaxPower;
-        PlayerCurrentPower = playerCurrentPower;
         WaveReached = waveReached;
         MaxHealthModifiersCount = maxHealthModifiersCount;
         MaxPowerModifiersCount = maxPowerModifiersCount;

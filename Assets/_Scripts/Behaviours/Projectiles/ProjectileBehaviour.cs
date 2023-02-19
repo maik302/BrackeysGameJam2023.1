@@ -17,18 +17,11 @@ public class ProjectileBehaviour : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        
-    }
-
-    void FixedUpdate() {
         Move();
     }
 
     void Move() {
-        var rigidBody = GetComponent<Rigidbody2D>();
-        if (rigidBody != null) {
-            rigidBody.AddForce(transform.up * _speed, ForceMode2D.Impulse);
-        }
+        transform.position += transform.up * _speed;
     }
 
     void OnTriggerEnter2D(Collider2D collider) {
@@ -37,5 +30,9 @@ public class ProjectileBehaviour : MonoBehaviour {
 
     public void Init(Action<GameObject, Collider2D> collisionAction) {
         _collisionAction = collisionAction;
+    }
+
+    public void ReleaseObject() {
+        _collisionAction(gameObject, null);
     }
 }

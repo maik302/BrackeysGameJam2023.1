@@ -8,12 +8,21 @@ public class PlayerMovementBehaviour : MonoBehaviour {
     [SerializeField]
     float _speed = 5f;
     [SerializeField]
-    Boundaries _boundaries;
-    [SerializeField]
     SpriteRenderer _playerSpriteRenderer;
 
+    Transform _topBoundary;
+    Transform _bottomBoundary;
+    Transform _leftBoundary;
+    Transform _rightBoundary;
     Vector2 _movementDirection;
     float _spriteMiddlePoint;
+
+    public void InitMovementBoundaries(Transform topBoundary, Transform bottomBoundary, Transform leftBoundary, Transform rightBoundary) {
+        _topBoundary = topBoundary;
+        _bottomBoundary = bottomBoundary;
+        _leftBoundary = leftBoundary;
+        _rightBoundary = rightBoundary;
+    }
 
     void Awake() {
         _movementDirection = new Vector2();
@@ -34,8 +43,8 @@ public class PlayerMovementBehaviour : MonoBehaviour {
     void Move(Vector2 direction) {
         var movementDirection = direction * _speed * Time.deltaTime;
         var boundedMovementDirection = new Vector2(
-            Mathf.Clamp(transform.position.x + movementDirection.x, _boundaries.LeftBoundary.position.x + _spriteMiddlePoint, _boundaries.RightBoundary.position.x - _spriteMiddlePoint),
-            Mathf.Clamp(transform.position.y + movementDirection.y, _boundaries.DownBoundary.position.y + _spriteMiddlePoint, _boundaries.UpBoundary.position.y - _spriteMiddlePoint)
+            Mathf.Clamp(transform.position.x + movementDirection.x, _leftBoundary.position.x + _spriteMiddlePoint, _rightBoundary.position.x - _spriteMiddlePoint),
+            Mathf.Clamp(transform.position.y + movementDirection.y, _bottomBoundary.position.y + _spriteMiddlePoint, _topBoundary.position.y - _spriteMiddlePoint)
         );
 
         transform.position = boundedMovementDirection;

@@ -9,6 +9,8 @@ TagManager:
   - Enemy
   - DownBoundary
   - PickupItem
+  - EnemyProjectile
+  - PlayerProjectile
   layers:
   - Default
   - TransparentFX
@@ -43,6 +45,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 785917685
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class EnemyType3MovementBehaviour : MonoBehaviour {
 
@@ -61,7 +62,7 @@ public class EnemyType3MovementBehaviour : MonoBehaviour {
         );
 
         transform.position = boundedMovementDirection;
-        _hasStoppedMoving = newYPosition == (_bottomBoundary.position.y + _spriteMiddlePoint);
+        _hasStoppedMoving =  Math.Round(newYPosition, 2) == Math.Round((_bottomBoundary.position.y + _spriteMiddlePoint), 2);
     }
 
     void Rotate() {

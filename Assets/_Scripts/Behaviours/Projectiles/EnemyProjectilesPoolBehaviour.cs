@@ -46,12 +46,19 @@ public class EnemyProjectilesPoolBehaviour : MonoBehaviour {
                     playerHealthBehaviour.TakeDamage();
                 }
                 _projectilesPool.Release(projectile);
-            } else if (!collider.gameObject.CompareTag(GameTags.PickupItemTag) && !collider.gameObject.CompareTag(GameTags.EnemyTag)) {
+            } else if (!collider.gameObject.CompareTag(GameTags.PickupItemTag) &&
+                        !collider.gameObject.CompareTag(GameTags.EnemyTag) &&
+                        !collider.gameObject.CompareTag(GameTags.EnemyProjectileTag)) {
                 _projectilesPool.Release(projectile);
             }
         }
 
-        HandleCollision(collider);
+        // Only when a collider is met, handle their collision. Otherwise, release this object to its pool
+        if (collider != null) {
+            HandleCollision(collider);
+        } else {
+            _projectilesPool.Release(projectile);
+        }
     }
 
     public GameObject GetProjectileInstance(Transform shooterTransform) {

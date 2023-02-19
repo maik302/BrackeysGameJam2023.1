@@ -1,0 +1,4 @@
+Player Ship Sprite: NjowOjQvMTQ6MDoxLzEzOjA6MC8xNTowOjEvMzowOi0xL3wwOjcvMTo2LzI6NC8zOjIvNDoyLzU6MTQv
+Enemy Type 1 Ship Sprite: MDowOjAvNDowOjMvMTY6MDozLzY6MDozLzA6MDowL3wwOjIvMTowLzI6MTcvMzoxMS80OjExLzU6MTMv
+Enemy Type 2 Ship Sprite: NDowOjAvMTE6MDowLzY6MDowLzQ6MDotMS8wOjA6NS98MDozLzE6My8yOjAvMzowLzQ6NS81Oi0xLw==
+Enemy Type 3 Ship Sprite: MzowOjEvODowOjEvMTY6MDowLzExOjA6MS8wOjA6Mi98MDoyLzE6MTAvMjoyLzM6NC80OjIvNTotMS8=
