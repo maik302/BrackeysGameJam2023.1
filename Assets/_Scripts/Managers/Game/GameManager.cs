@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         var randomBgmAudioIndex = UnityEngine.Random.Range(0, 2);
-        AudioManager.Instance.Play((randomBgmAudioIndex == 0) ? AudioNames.Bgm0 : AudioNames.Bgm1);
+        AudioManager.Instance.Play((randomBgmAudioIndex == 0) ? AudioNames.Bgm0Music : AudioNames.Bgm1Music);
         InitGame();
     }
 
@@ -192,6 +192,7 @@ public class GameManager : MonoBehaviour {
         }
 
         void ShowGameOverScreen() {
+            AudioManager.Instance.Play(AudioNames.GameOverSFX);
             _gameOverScreen.SetActive(true);
 
             var gameOverScreenController = _gameOverScreen.transform.GetComponent<GameOverScreenController>();

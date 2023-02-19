@@ -66,6 +66,7 @@ public class EnemyProjectilesPoolBehaviour : MonoBehaviour {
         projectileInstance.transform.position = shooterTransform.position;
         projectileInstance.transform.rotation = shooterTransform.rotation;
         
+        AudioManager.Instance.Play(AudioNames.EnemyProjectileSFX);
         return projectileInstance;
     }
 }

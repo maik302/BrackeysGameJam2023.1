@@ -57,6 +57,10 @@ public class AudioManager : MonoBehaviour {
                 if (playingBGM == null) {
                     sound.AudioSource.Play();
                     sound.IsPlaying = true;
+                } else if (playingBGM.Name != name) {
+                    Stop(playingBGM.Name);
+                    sound.AudioSource.Play();
+                    sound.IsPlaying = true;
                 }
             }
         }
