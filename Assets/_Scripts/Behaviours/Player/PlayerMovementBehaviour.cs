@@ -8,16 +8,12 @@ public class PlayerMovementBehaviour : MonoBehaviour {
     [SerializeField]
     float _speed = 5f;
     [SerializeField]
-    Transform _topBoundary;
-    [SerializeField]
-    Transform _bottomBoundary;
-    [SerializeField]
-    Transform _leftBoundary;
-    [SerializeField]
-    Transform _rightBoundary;
-    [SerializeField]
     SpriteRenderer _playerSpriteRenderer;
 
+    Transform _topBoundary;
+    Transform _bottomBoundary;
+    Transform _leftBoundary;
+    Transform _rightBoundary;
     Vector2 _movementDirection;
     float _spriteMiddlePoint;
 
