@@ -106,6 +106,8 @@ public class GameManager : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+        var randomBgmAudioIndex = UnityEngine.Random.Range(0, 2);
+        AudioManager.Instance.Play((randomBgmAudioIndex == 0) ? AudioNames.Bgm0 : AudioNames.Bgm1);
         InitGame();
     }
 

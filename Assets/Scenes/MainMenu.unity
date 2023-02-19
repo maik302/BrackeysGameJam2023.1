@@ -167,7 +167,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ce99c7478acd5a40858491335c9a9a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sounds: []
+  Sounds:
+  - Name: MenuMusic
+    AudioClip: {fileID: 8300000, guid: 76b53e46ff6ef6745931798de86f2bd4, type: 3}
+    Volume: 0.2
+    Pitch: 1
+    Loop: 1
+    AudioSource: {fileID: 0}
+    IsPlaying: 0
+    IsBGM: 1
+  - Name: BGM0
+    AudioClip: {fileID: 8300000, guid: 63e2d732badada7439c476ac14746617, type: 3}
+    Volume: 0.2
+    Pitch: 1
+    Loop: 1
+    AudioSource: {fileID: 0}
+    IsPlaying: 0
+    IsBGM: 1
+  - Name: BGM1
+    AudioClip: {fileID: 8300000, guid: b470432d7ce59ed4db71697500c86e9e, type: 3}
+    Volume: 0.2
+    Pitch: 1
+    Loop: 1
+    AudioSource: {fileID: 0}
+    IsPlaying: 0
+    IsBGM: 1
 --- !u!1 &234749534
 GameObject:
   m_ObjectHideFlags: 0
@@ -971,7 +995,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1270099116
 Transform:
   m_ObjectHideFlags: 0
@@ -1105,7 +1129,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1959937422
 Transform:
   m_ObjectHideFlags: 0
