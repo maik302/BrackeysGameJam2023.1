@@ -79,4 +79,10 @@ public class PlayerHealthBehaviour : MonoBehaviour {
         _maxHealthAllowed = maxHealthAllowed;
     }
 
+    void OnCollisionEnter2D(Collision2D collider) {
+        if (collider.gameObject.CompareTag(GameTags.EnemyTag)) {
+            TakeDamage();
+        }
+    }
+
 }
